@@ -1,0 +1,160 @@
+﻿@using UniversityManagement.Models
+
+@{
+    ViewBag.Title = "Save";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List <Department> departments = ViewBag.Departments;
+    List<Semister> semisters = ViewBag.Semister;
+}
+
+<h2>@ViewBag.Message</h2>
+<form id="CourseForm" method="POST">
+
+    <div class="login-form">
+
+        <h3 class="text-center">Save Course</h3>
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                <label for="Code"> Code </label>
+
+            </div>
+
+            <div class="col-md-8">
+                <input type="text" id="Code" name="Code" class="form-control" />
+
+            </div>
+            <br />
+            <br />
+
+        </div>
+
+        <div class="row form-group">
+
+            <div class="col-md-4 text-right">
+                <label for="Name"> Name </label>
+
+            </div>
+
+            <div class="col-md-8">
+                <input type="text" id="Name" name="Name" class="form-control" />
+
+            </div>
+            <br /><br />
+
+        </div>
+
+        <div class="row form-group">
+
+            <div class="col-md-4 text-right">
+                <label for="Credit"> Credit </label>
+
+            </div>
+
+            <div class="col-md-8">
+                <input type="text" id="Credit" name="Credit" class="form-control" />
+
+            </div>
+            <br/><br/>
+
+        </div>
+
+        <div class="row form-group">
+
+            <div class="col-md-4 text-right">
+                <label for="Description"> Description </label>
+
+            </div>
+
+            <div class="col-md-8">
+                <textarea id="Description" rows="3" name="Description" class="form-control"></textarea>
+
+            </div>
+            <br/><br/>
+
+        </div>
+
+
+
+        <div class="row form-group">
+
+            <div class="col-md-4 text-right">
+                <label for="DepartmentId"> Department </label>
+
+            </div>
+
+            <div class="col-md-8">
+                <select id="DepartmentId" name="DepartmentId" class="form-control">
+                    <option value="">--Select--</option>
+                    @foreach (var departmemnt in departments)
+                    {
+                        <option value="@departmemnt.Id">@departmemnt.Name</option>
+                    }
+                </select>
+
+
+
+            </div>
+            <br/><br/>
+
+        </div>
+
+        <div class="row form-group">
+
+            <div class="col-md-4 text-right">
+                <label for="SemisterId"> Semister </label>
+
+            </div>
+
+            <div class="col-md-8">
+                <select id="SemisterId" name="SemisterId" class="form-control">
+                    <option value="">--Select--</option>
+                    @foreach (var semister in semisters)
+                    {
+                        <option value="@semister.Id">@semister.Name</option>
+                    }
+                </select>
+
+
+
+            </div>
+            <br /><br />
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="Save" class="btn btn-info" />
+
+            </div>
+
+        </div>
+    </div>
+
+</form>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script>
+    $("#CourseForm").validate({
+        rules: {
+            Name: "required",
+            Code: {
+                required: true,
+                minlength: 5
+            },
+            Credit: {
+                required: true,
+                max:5.0,
+                min: 0.5
+            },
+            DepartmentId: "required",
+            SemisterId: "required"
+        },
+        messages: {
+            Name: "Please enter a course name",
+            Code: {
+                required: "Please enter a course code",
+                //maxlength: "Maxlength 7",
+                //minlength: "Minlength 2"
+            }
+        }
+    });
+</script>
