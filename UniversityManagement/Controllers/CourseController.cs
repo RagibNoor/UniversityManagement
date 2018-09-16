@@ -12,6 +12,7 @@ namespace UniversityManagement.Controllers
 	{
 		DepartmentBLL departmentBll = new DepartmentBLL();
         CourseBLL courseBll = new CourseBLL();
+        
 		//
 		// GET: /Course/
 		public ActionResult Index()
@@ -37,5 +38,21 @@ namespace UniversityManagement.Controllers
 
             return View();
         }
+        
+            [HttpGet]
+        public JsonResult IsCodeExist(string code)
+        {
+            List<Course> courses = courseBll.GetCourses();
+            bool isExist = courses.FirstOrDefault(u => u.Code.ToLowerInvariant().Equals(code.ToLower())) != null;
+            return Json(!isExist, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult IsNameExist(string Name)
+        {
+            List<Course> courses = courseBll.GetCourses();
+            bool isExist = courses.FirstOrDefault(u => u.Name.ToLowerInvariant().Equals(Name.ToLower())) != null;
+            return Json(!isExist, JsonRequestBehavior.AllowGet);
+        }  
 	}
 }

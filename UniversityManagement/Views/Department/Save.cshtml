@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Collections.Specialized
+@{
     ViewBag.Title = "Save";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -50,16 +51,18 @@
     </div>
 
 </form>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/jquery.validate.js"></script>
-<script>
+
+
+ @section scripts
+{
+    <script>
     $("#DepartmentForm").validate({
         rules: {
             Name: "required",
             Code: {
                 required: true,
                 maxlength: 7,
-                minlength:2
+                minlength: 2
             }
         },
         messages: {
@@ -72,5 +75,4 @@
         }
     });
 </script>
-
-
+}

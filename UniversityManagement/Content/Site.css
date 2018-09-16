@@ -25,7 +25,7 @@ textarea {
 	display: none;
 }
 
-input.input-validation-error {
+input.input-validation-error, textarea.input-validation-error, select.input-validation-error {
 	border: 1px solid #b94a48;
 }
 
@@ -49,9 +49,9 @@ body {
 	.login-form form {
 		margin-bottom: 15px;
 		background: #f7f7f7;
-		-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		-ms-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		-webkit-box-shadow: 0px 15px 10px -15px #111;
+		-ms-box-shadow: 0px 15px 10px -15px #111;
+		 box-shadow: 0px 15px 10px -15px #111;
 		padding: 30px;
 	}
 
@@ -70,6 +70,66 @@ body {
 		margin-bottom: 17px;
 	}
  label.error {
-     color: red;
-     font-style: italic;
+	 color: #ff0000;
+	 font-style: italic;
  }
+  .field-validation-error {
+	 font-style: italic;
+			color: #ff0000;
+		}
+
+
+
+  .headingStyle {
+  text-align: center;
+  position: relative;
+  margin: 15px auto;
+}
+ .headingStyle h2 {
+  font-family: arial;
+  color: #333;
+  font-size: 40px;
+  text-align: center;
+  margin: 0 30px;
+  
+}
+
+.headingStyle span {
+  display: inline-block;
+  position: absolute;
+  background: #d8b426;
+  height: 3px;
+  left: 50%;
+}
+span.top {
+  width: 58px;
+  top: 20px;
+}
+span.bottom {
+  width: 78px;
+  top: 35px;
+}
+span.left {
+  transform: translateX(-211px);
+}
+span.bottom.left {
+  transform: translateX(-230px);
+}
+span.right {
+  transform: translateX(149px);
+}
+.navbar{background:#222222;}
+.nav-item::after{content:'';display:block;width:0px;height:2px;background:#fec400;transition: 0.2s;}
+.nav-item:hover::after{width:100%;}
+.navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show > .nav-link,.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover{color:#fec400;}
+.nav-link{padding:15px 5px;transition:0.2s;}
+.dropdown-item.active, .dropdown-item:active{color:#212529;}
+.dropdown-item:focus, .dropdown-item:hover{background:#fec400;}
+
+.navbar-brand{ 
+ background: url("img/logo.png") center no-repeat;
+    background-size: contain;
+  width: 120px;
+    height: 45px;
+ 
+}

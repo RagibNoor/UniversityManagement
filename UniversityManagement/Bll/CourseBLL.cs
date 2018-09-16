@@ -36,5 +36,10 @@ namespace UniversityManagement.Bll
             }
 
         }
+
+        public List<Course> GetCourses()
+        {
+            return courseGateway.GetCourses();
+        }
     }
 }

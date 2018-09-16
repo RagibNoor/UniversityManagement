@@ -1,4 +1,5 @@
 ﻿@using UniversityManagement.Models
+@model Course
 
 @{
     ViewBag.Title = "Save";
@@ -6,132 +7,132 @@
     List <Department> departments = ViewBag.Departments;
     List<Semister> semisters = ViewBag.Semister;
 }
-
+<div class="headingStyle">
+    <span class="top right"></span>
+    <span class="top left"></span>
+    <h2>Add Course</h2>
+    <span class="bottom right"></span>
+    <span class="bottom left"></span>
+</div>
 <h2>@ViewBag.Message</h2>
-<form id="CourseForm" method="POST">
+<div class="login-form">
+    <form id="CourseForm" method="POST">
 
-    <div class="login-form">
 
-        <h3 class="text-center">Save Course</h3>
-        <div class="row form-group">
-            <div class="col-md-4 text-right">
-                <label for="Code"> Code </label>
 
-            </div>
-
-            <div class="col-md-8">
-                <input type="text" id="Code" name="Code" class="form-control" />
-
-            </div>
-            <br />
-            <br />
+   <!---code--->
+    <div class="row form-group">
+        <div class="col-md-4 text-right">
+            @Html.LabelFor(c=>c.Code)
 
         </div>
 
-        <div class="row form-group">
+        <div class="col-md-8">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
 
-            <div class="col-md-4 text-right">
-                <label for="Name"> Name </label>
+        </div>
+        
 
-            </div>
+    </div>
+        <!---Name--->
+    <div class="row form-group">
 
-            <div class="col-md-8">
-                <input type="text" id="Name" name="Name" class="form-control" />
-
-            </div>
-            <br /><br />
+        <div class="col-md-4 text-right">
+            @Html.LabelFor(c => c.Name)
 
         </div>
 
-        <div class="row form-group">
+        <div class="col-md-8">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
 
-            <div class="col-md-4 text-right">
-                <label for="Credit"> Credit </label>
+        </div>
+        <br/><br/>
 
-            </div>
+    </div>
+        <!---Credit--->
 
-            <div class="col-md-8">
-                <input type="text" id="Credit" name="Credit" class="form-control" />
+    <div class="row form-group">
 
-            </div>
-            <br/><br/>
+        <div class="col-md-4 text-right">
+            @Html.LabelFor(c => c.Credit)
 
         </div>
 
-        <div class="row form-group">
+        <div class="col-md-8">
+            @Html.TextBoxFor(c => c.Credit, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Credit)
 
-            <div class="col-md-4 text-right">
-                <label for="Description"> Description </label>
+        </div>
+      
 
-            </div>
+    </div>
+        <!----Description-->
 
-            <div class="col-md-8">
-                <textarea id="Description" rows="3" name="Description" class="form-control"></textarea>
+    <div class="row form-group">
 
-            </div>
-            <br/><br/>
+        <div class="col-md-4 text-right">
+            @Html.LabelFor(c => c.Description)
 
         </div>
 
-
-
-        <div class="row form-group">
-
-            <div class="col-md-4 text-right">
-                <label for="DepartmentId"> Department </label>
-
-            </div>
-
-            <div class="col-md-8">
-                <select id="DepartmentId" name="DepartmentId" class="form-control">
-                    <option value="">--Select--</option>
-                    @foreach (var departmemnt in departments)
-                    {
-                        <option value="@departmemnt.Id">@departmemnt.Name</option>
-                    }
-                </select>
-
-
-
-            </div>
-            <br/><br/>
+        <div class="col-md-8">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Description)
 
         </div>
+        <br/><br/>
 
-        <div class="row form-group">
-
-            <div class="col-md-4 text-right">
-                <label for="SemisterId"> Semister </label>
-
-            </div>
-
-            <div class="col-md-8">
-                <select id="SemisterId" name="SemisterId" class="form-control">
-                    <option value="">--Select--</option>
-                    @foreach (var semister in semisters)
-                    {
-                        <option value="@semister.Id">@semister.Name</option>
-                    }
-                </select>
-
-
-
-            </div>
-            <br /><br />
-
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-right">
-                <input type="submit" value="Save" class="btn btn-info" />
-
-            </div>
-
-        </div>
     </div>
 
+
+        <!---Department--->
+
+    <div class="row form-group">
+
+        <div class="col-md-4 text-right">
+            @Html.LabelFor(c => c.DepartmentId)
+
+        </div>
+
+        <div class="col-md-8">
+            @Html.DropDownListFor(c => c.DepartmentId, new SelectList(ViewBag.Departments, "Id", "Name"), "--Select--", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.DepartmentId)
+        </div>
+        <br/><br/>
+
+    </div>
+        <!---Semister--->
+
+    <div class="row form-group">
+
+        <div class="col-md-4 text-right">
+            @Html.LabelFor(c => c.SemisterId)
+
+        </div>
+
+        <div class="col-md-8">
+            @Html.DropDownListFor(c => c.SemisterId, new SelectList(ViewBag.Semister, "Id", "Name"), "--Select--", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.SemisterId)
+        </div>
+        <br/><br/>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <input type="submit" value="Save" class="btn btn-info"/>
+
+        </div>
+
+    </div>
+
+
 </form>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/jquery.validate.js"></script>
+</div>
+
+@*@section scripts
+{
 <script>
     $("#CourseForm").validate({
         rules: {
@@ -142,7 +143,7 @@
             },
             Credit: {
                 required: true,
-                max:5.0,
+                max: 5.0,
                 min: 0.5
             },
             DepartmentId: "required",
@@ -158,3 +159,6 @@
         }
     });
 </script>
+    
+}*@
+

@@ -14,7 +14,6 @@ namespace UniversityManagement.Gateway
           WebConfigurationManager.ConnectionStrings["UniversityMangement"].ConnectionString;
         public List<Semister> GetSemister()
         {
-            //SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-NQGNJQ07\SQLEXPRESS;Initial Catalog=StockManagement;Integrated Security=True");
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
             string query = "select * from  Semister";
@@ -70,7 +69,6 @@ namespace UniversityManagement.Gateway
 
         public bool IsExsit(string code, string name)
         {
-            // SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-NQGNJQ07\SQLEXPRESS;Initial Catalog=StockManagement;Integrated Security=True");
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
             string query = "select * from  Course where Name = @Name OR Code = @Code";
@@ -86,5 +84,26 @@ namespace UniversityManagement.Gateway
             return false;
 
         }
+
+        public List<Course> GetCourses()
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select * from  Course";
+            SqlCommand cmd = new SqlCommand(query,con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<Course> courses = new List<Course>();
+
+            while (reader.Read())
+            {
+                Course course = new Course();
+                course.Code = reader["Code"].ToString();
+                course.Name = reader["Name"].ToString();
+                courses.Add(course);
+            }
+            reader.Close();
+            con.Close();
+            return courses;
+        } 
     }
 }

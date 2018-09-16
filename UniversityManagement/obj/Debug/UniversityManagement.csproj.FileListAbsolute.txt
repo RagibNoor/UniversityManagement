@@ -50,6 +50,6 @@ D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\Microsoft.
 D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\Microsoft.Owin.Security.Google.xml
 D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\Microsoft.Owin.Security.Twitter.xml
 D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.csprojResolveAssemblyReference.cache
 D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.dll
 D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.pdb
+D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.csprojResolveAssemblyReference.cache

@@ -1,0 +1,115 @@
+﻿@model UniversityManagement.Models.Teacher  
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="headingStyle">
+    <span class="top right"></span>
+    <span class="top left"></span>
+    <h2>Add Teacher</h2>
+    <span class="bottom right"></span>
+    <span class="bottom left"></span>
+</div>
+
+<h2>@ViewBag.Message</h2>
+<div class="login-form ">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "SaveTeacher", @class = "wow slideInUp", data_wow_duration="2s",data_wow_offset="0" }))
+    {
+        //Name
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.Name)
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBoxFor(c => c.Name, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+        
+        //address
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.Address)
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextAreaFor(c => c.Address, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Address)
+
+
+            </div>
+        </div>
+        
+        //email
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.Email)
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBoxFor(c => c.Email, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+        </div>
+        
+        //Contact no
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.ContactNumber)
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBoxFor(c => c.ContactNumber, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.ContactNumber)
+            </div>
+        </div>
+        
+        //desigtantion
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.DesignationId)
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.DesignationId, new SelectList(ViewBag.Designations, "Id", "DesignationName"), "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.DesignationId)
+            </div>
+        </div>
+        
+        //department
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.DepartmentId)
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.DepartmentId, new SelectList(ViewBag.Departments, "Id", "Name"), "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.DepartmentId)
+            </div>
+        </div>
+        
+        //credittobeTaken
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.CreditToBeTaken)
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBoxFor(c => c.CreditToBeTaken, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CreditToBeTaken)
+            </div>
+        </div>
+        
+        //submitBTn
+        
+         <div class="row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="Save" class="btn btn-info"/>
+
+            </div>
+
+        </div>
+        
+    }
+</div>
