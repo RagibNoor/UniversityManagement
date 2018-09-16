@@ -1,59 +1,60 @@
 ﻿@using System.Collections.Specialized
+@model UniversityManagement.Models.Department
 @{
     ViewBag.Title = "Save";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Message</h2>
-<form id="DepartmentForm" method="POST">
+<div class="headingStyle">
+    <span class="top right"></span>
+    <span class="top left"></span>
+    <h2>Add Department</h2>
+    <span class="bottom right"></span>
+    <span class="bottom left"></span>
+</div>
 
-    <div class="login-form">
+<div class="login-form">
+    <form id="DepartmentForm" method="POST" class="wow slideInUp"  data-wow-duration="2s" data-wow-offset="0">
 
-        <h3 class="text-center">Save Department</h3>
+
+
         <div class="row form-group">
             <div class="col-md-4 text-right">
-                <label for="Code"> Code </label>
-
+                @Html.LabelFor(a => a.Name)
             </div>
-
             <div class="col-md-8">
-                <input type="text" id="Code" name="Code"  class="form-control"/>
+                @Html.TextBoxFor(a => a.Name, new { @class = "form-control" })
 
             </div>
-            <br/>
-            <br/>
-
         </div>
 
         <div class="row form-group">
 
             <div class="col-md-4 text-right">
-                <label for="Name"> Name </label>
-
+                @Html.LabelFor(a => a.Name)
             </div>
 
             <div class="col-md-8">
-                <input type="text" id="Name" name="Name" class="form-control"/>
-
+                @Html.TextBoxFor(a => a.Code, new { @class = "form-control" })
             </div>
-            <br/><br/>
 
         </div>
 
 
         <div class="row">
             <div class="col-md-12 text-right">
-                <input type="submit" value="Save" class="btn btn-info"/>
+                <input type="submit" value="Save" class="btn btn-info" />
 
             </div>
 
         </div>
-    </div>
 
-</form>
+    </form>
+</div>
 
 
- @section scripts
+
+ @*@section scripts
 {
     <script>
     $("#DepartmentForm").validate({
@@ -75,4 +76,4 @@
         }
     });
 </script>
-}
+}*@

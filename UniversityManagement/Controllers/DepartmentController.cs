@@ -35,5 +35,19 @@ namespace UniversityManagement.Controllers
             List<Department> departments = departmentBll.GetDepartments();
             return View(departments);
         }
+        public JsonResult IsCodeExist(string code)
+        {
+            List<Department> departments = departmentBll.GetDepartments();
+            bool isExist = departments.FirstOrDefault(u => u.Code.ToLowerInvariant().Equals(code.ToLower())) != null;
+            return Json(!isExist, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult IsNameExist(string Name)
+        {
+            List<Department> departments = departmentBll.GetDepartments();
+            bool isExist = departments.FirstOrDefault(u => u.Name.ToLowerInvariant().Equals(Name.ToLower())) != null;
+            return Json(!isExist, JsonRequestBehavior.AllowGet);
+        }  
 	}
 }

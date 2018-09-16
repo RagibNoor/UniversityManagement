@@ -16,119 +16,119 @@
 </div>
 <h2>@ViewBag.Message</h2>
 <div class="login-form">
-    <form id="CourseForm" method="POST">
+    <form id="CourseForm" method="POST" class="wow slideInUp" data-wow-duration="2s" data-wow-offset="0">
 
 
 
-   <!---code--->
-    <div class="row form-group">
-        <div class="col-md-4 text-right">
-            @Html.LabelFor(c=>c.Code)
+        <!---code--->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(c => c.Code)
+
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name)
+
+            </div>
+
 
         </div>
-
-        <div class="col-md-8">
-            @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Name)
-
-        </div>
-        
-
-    </div>
         <!---Name--->
-    <div class="row form-group">
+        <div class="row form-group">
 
-        <div class="col-md-4 text-right">
-            @Html.LabelFor(c => c.Name)
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(c => c.Name)
+
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name)
+
+            </div>
+            <br /><br />
 
         </div>
-
-        <div class="col-md-8">
-            @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Name)
-
-        </div>
-        <br/><br/>
-
-    </div>
         <!---Credit--->
 
-    <div class="row form-group">
+        <div class="row form-group">
 
-        <div class="col-md-4 text-right">
-            @Html.LabelFor(c => c.Credit)
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(c => c.Credit)
+
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBoxFor(c => c.Credit, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Credit)
+
+            </div>
+
 
         </div>
-
-        <div class="col-md-8">
-            @Html.TextBoxFor(c => c.Credit, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Credit)
-
-        </div>
-      
-
-    </div>
         <!----Description-->
 
-    <div class="row form-group">
+        <div class="row form-group">
 
-        <div class="col-md-4 text-right">
-            @Html.LabelFor(c => c.Description)
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(c => c.Description)
+
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Description)
+
+            </div>
+            <br /><br />
 
         </div>
-
-        <div class="col-md-8">
-            @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Description)
-
-        </div>
-        <br/><br/>
-
-    </div>
 
 
         <!---Department--->
 
-    <div class="row form-group">
+        <div class="row form-group">
 
-        <div class="col-md-4 text-right">
-            @Html.LabelFor(c => c.DepartmentId)
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(c => c.DepartmentId)
+
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.DepartmentId, new SelectList(ViewBag.Departments, "Id", "Name"), "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.DepartmentId)
+            </div>
+            <br /><br />
 
         </div>
-
-        <div class="col-md-8">
-            @Html.DropDownListFor(c => c.DepartmentId, new SelectList(ViewBag.Departments, "Id", "Name"), "--Select--", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.DepartmentId)
-        </div>
-        <br/><br/>
-
-    </div>
         <!---Semister--->
 
-    <div class="row form-group">
+        <div class="row form-group">
 
-        <div class="col-md-4 text-right">
-            @Html.LabelFor(c => c.SemisterId)
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(c => c.SemisterId)
+
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.SemisterId, new SelectList(ViewBag.Semister, "Id", "Name"), "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SemisterId)
+            </div>
+            <br /><br />
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="Save" class="btn btn-info" />
+
+            </div>
 
         </div>
 
-        <div class="col-md-8">
-            @Html.DropDownListFor(c => c.SemisterId, new SelectList(ViewBag.Semister, "Id", "Name"), "--Select--", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.SemisterId)
-        </div>
-        <br/><br/>
 
-    </div>
-    <div class="row">
-        <div class="col-md-12 text-right">
-            <input type="submit" value="Save" class="btn btn-info"/>
-
-        </div>
-
-    </div>
-
-
-</form>
+    </form>
 </div>
 
 @*@section scripts
