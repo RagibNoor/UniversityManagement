@@ -32,6 +32,7 @@ namespace UniversityManagement.Controllers
         [HttpPost]
         public ActionResult Save(Course course)
         {
+            
             ViewBag.Departments = departmentBll.GetDepartments();
             ViewBag.Semister = courseBll.GetSemister();
             ViewBag.Message = courseBll.Save(course);
@@ -53,6 +54,18 @@ namespace UniversityManagement.Controllers
             List<Course> courses = courseBll.GetCourses();
             bool isExist = courses.FirstOrDefault(u => u.Name.ToLowerInvariant().Equals(Name.ToLower())) != null;
             return Json(!isExist, JsonRequestBehavior.AllowGet);
-        }  
+        }
+
+        public ActionResult AssignTeacher()
+        {
+            ViewBag.Departments = departmentBll.GetDepartments();
+            return View();
+        }
+        public ActionResult SelectedDepartment(int id)
+        {
+            List<Course> courses = courseBll.GetCourses();
+            var selectedCustomer = courses.FindAll(a => a.DepartmentId == id).ToList();
+            return Json(selectedCustomer, JsonRequestBehavior.AllowGet);
+        }
 	}
 }

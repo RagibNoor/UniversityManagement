@@ -34,5 +34,7 @@ namespace UniversityManagement.Models
          [Required(ErrorMessage = "This Field is Required")]
          [Display(Name = "Semister")]
         public int SemisterId { get; set; }
+
+       
     }
 }

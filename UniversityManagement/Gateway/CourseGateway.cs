@@ -99,6 +99,10 @@ namespace UniversityManagement.Gateway
                 Course course = new Course();
                 course.Code = reader["Code"].ToString();
                 course.Name = reader["Name"].ToString();
+                course.DepartmentId = (int) reader["DepartmentID"];
+                course.SemisterId = (int)reader["SemisterId"];
+                course.Credit =  (decimal) reader["Credit"];
+
                 courses.Add(course);
             }
             reader.Close();
