@@ -14,7 +14,7 @@
     <span class="bottom left"></span>
 </div>
 <div class="login-form ">
-    <form>
+    <form id="AssignTeacher" method="POST" class="wow slideInDown" data-wow-duration="2s" data-wow-offset="0">
         <!--Department-->
         <div class="row form-group">
             <div class="col-md-4 text-right">
@@ -33,7 +33,7 @@
             </div>
 
             <div class="col-md-8">
-                @Html.DropDownListFor(c => c.TeacherID, new SelectList(ViewBag.Departments, "Id", "Name"), "--Select--", new { @class = "form-control" })
+                @Html.DropDownListFor(c => c.TeacherID, new SelectList(""), "--Select--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.TeacherID)
             </div>
         </div>
@@ -47,7 +47,7 @@
                 @Html.TextBox("CreditToBeTaken", null, new { @class = "form-control", @readonly = "readonly" })
             </div>
         </div>
-        
+
         <!--Remaining Credit-->
         <div class="row form-group">
             <div class="col-md-4 text-right">
@@ -69,7 +69,7 @@
                 @Html.ValidationMessageFor(m => m.CourseId)
             </div>
         </div>
-        
+
         <!--Course Name-->
         <div class="row form-group">
             <div class="col-md-4 text-right">
@@ -80,18 +80,18 @@
                 @Html.TextBox("CourseName", null, new { @class = "form-control", @readonly = "readonly" })
             </div>
         </div>
-        
+
         <!--Course Code-->
         <div class="row form-group">
             <div class="col-md-4 text-right">
-                @Html.Label("CourseCode", "Code")
+                @Html.Label("CourseCredit", "Credit")
             </div>
 
             <div class="col-md-8">
-                @Html.TextBox("CourseCode", null, new { @class = "form-control", @readonly = "readonly" })
+                @Html.TextBox("CourseCredit", null, new { @class = "form-control", @readonly = "readonly" })
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-12 text-right">
                 <input type="submit" value="Save" class="btn btn-info" />
@@ -103,38 +103,110 @@
 </div>
 @section scripts
 {
-  
-    <script type="text/javascript">
-   // Console.log("hello");
-    $(document).ready(function () {
 
-        $('#DepartmentId').on('change', function () {
-            var departmentId = $('#DepartmentId option:selected').val();
-            alert(departmentId);
-           // Console.log(memebershipId);
-            $.ajax({
-                type: 'GET',
-                data: { Id: departmentId },
-                url: '@Url.Action("SelectedDepartment", "Course")',
-                success: function (result) {
-                   // Console.log(result);
-                    var a = '';
-                    if (departmentId == null) {
-                        $('#CourseId').html(a);
-                    } else {
-                        for (var i = 0; i < result.length; i++) {
-                            a += '<option value="' + result[i].id + '">' + result[i].Name + '</option>';
+    <script type="text/javascript">
+        // Console.log("hello");
+        $(document).ready(function() {
+            var courses;
+            var teachers
+            $('#DepartmentId').on('change', function() {
+                var departmentId = $('#DepartmentId option:selected').val();
+              //  alert(departmentId);
+                // Console.log(memebershipId);
+                //course
+                $.ajax({
+                    type: 'GET',
+                    data: { Id: departmentId },
+                    url: '@Url.Action("SelectedDepartmentCourse", "Course")',
+                    success: function(result) {
+                        courses = result;
+                        console.log(courses);
+                        var a = '';
+                        if (departmentId == null) {
+                            $('#CourseId').html(a);
+                        } else {
+                            a = '<option value="">--Select--</option>';
+
+                            for (var i = 0; i < result.length; i++) {
+                                a += '<option value="' + result[i].Id + '">' + result[i].Code + '</option>';
+
+                            }
+                            $('#CourseId').html(a);
 
                         }
-                        $('#CourseId').html(a);
-                    }
 
+                    }
+                });
+                //teacher
+                $.ajax({
+                    type: 'GET',
+                    data: { Id: departmentId },
+                    url: '@Url.Action("SelectedDepartmentTeacher", "Course")',
+                    success: function(result) {
+                        teachers = result;
+                        console.log(teachers);
+                        // Console.log(result);
+                        var a = '';
+                        if (departmentId == null) {
+                            $('#TeacherID').html(a);
+                        } else {
+                            a = '<option value="">--Select--</option>';
+                            for (var i = 0; i < result.length; i++) {
+                                a += '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
+
+                            }
+                            $('#TeacherID').html(a);
+                        }
+
+                    }
+                });
+
+            });
+            $('#CourseId').on('change', function () {
+
+                var courseId = $('#CourseId option:selected').val();
+                if (courseId == null) {
+                    $('#CourseCredit').val(null);
+                    $('#CourseName').val(null);
+
+                } else {
+                    $.each(courses, function (key, value) {
+                        if (value.Id == courseId) {
+                            //console.log(teacherID);
+                            // console.log(value.Id);
+                            $('#CourseCredit').val(value.Credit);
+                            $('#CourseName').val(value.Name);
+                        }
+                    });
                 }
+
+
+            });
+            $('#TeacherID').on('change', function () {
+                
+                var teacherID = $('#TeacherID option:selected').val();
+                if (teacherID == null) {
+                    $('#CreditToBeTaken').val(null);
+                    $('#RemainingCredit').val(null);
+
+
+
+                } else {
+                    $.each(teachers, function (key, value) {
+                        if (value.Id == teacherID) {
+                            //console.log(teacherID);
+                            // console.log(value.Id);
+                            $('#CreditToBeTaken').val(value.CreditToBeTaken);
+                            $('#RemainingCredit').val(value.RemainigCredit);
+
+                        }
+                    });
+                }
+             
+
             });
 
         });
-
-    });
 
     </script>
 }

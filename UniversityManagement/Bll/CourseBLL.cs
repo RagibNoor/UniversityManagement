@@ -18,8 +18,7 @@ namespace UniversityManagement.Bll
 
         public string Save(Course course)
         {
-            if (!courseGateway.IsExsit(course.Code, course.Name))
-            {
+          
                 if (courseGateway.Save(course)> 0)
                 {
                     return "Save";
@@ -28,13 +27,23 @@ namespace UniversityManagement.Bll
                 {
                     return "Error";
                 }
-            }
+            
 
+            
+
+        }
+
+        public string SaveAssignTeacher(CourseAssign course)
+        {
+            if (courseGateway.SaveAssignTeacher(course)> 0)
+            {
+                return "Save";
+            }
             else
             {
-                return "Already Exist";
+                return "Error";
             }
-
+            
         }
 
         public List<Course> GetCourses()

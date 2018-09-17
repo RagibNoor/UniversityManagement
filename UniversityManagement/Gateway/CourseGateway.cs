@@ -34,21 +34,35 @@ namespace UniversityManagement.Gateway
             return semisters;
         }
 
+        public int SaveAssignTeacher(CourseAssign course)
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "insert into AssignTeacher(Credit,DepartmentId,CourseId,TeacherId) values(@Credit,@DepartmentId,@CourseId,@TeacherId)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("Credit", course.CourseCredit);
+            cmd.Parameters.AddWithValue("DepartmentId", course.DepartmentId);
+            cmd.Parameters.AddWithValue("CourseId", course.CourseId);
+            cmd.Parameters.AddWithValue("TeacherId", course.TeacherID);
+            int rowCount = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowCount;
+        }
         public int Save(Course course)
         {
-            //SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-NQGNJQ07\SQLEXPRESS;Initial Catalog=StockManagement;Integrated Security=True");
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
             string query;
-            if (course.Description==null)
+            if (course.Description == null)
             {
-                 query = "insert into Course(Name,Code,Credit,DepartmentId,SemisterId) values(@Name,@code,@Credit,@DepartmentId,@SemisterId)";
-                
+                query = "insert into Course(Name,Code,Credit,DepartmentId,SemisterId) values(@Name,@Code,@Credit,@DepartmentId,@SemisterId)";
+
             }
             else
             {
-                 query = "insert into Course(Name,Code,Credit,Description,DepartmentId,SemisterId) values(@Name,@code,@Credit,@Description,@DepartmentId,@SemisterId)";
-                
+                query = "insert into Course(Name,Code,Credit,Description,DepartmentId,SemisterId) values(@Name,@Code,@Credit,@Description,@DepartmentId,@SemisterId)";
+
             }
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.Clear();
@@ -58,7 +72,7 @@ namespace UniversityManagement.Gateway
             if (course.Description != null)
             {
                 cmd.Parameters.AddWithValue("Description", course.Description);
-                
+
             }
             cmd.Parameters.AddWithValue("DepartmentId", course.DepartmentId);
             cmd.Parameters.AddWithValue("SemisterId", course.SemisterId);
@@ -67,23 +81,24 @@ namespace UniversityManagement.Gateway
             return rowCount;
         }
 
-        public bool IsExsit(string code, string name)
-        {
-            SqlConnection con = new SqlConnection(ConnectinString);
-            con.Open();
-            string query = "select * from  Course where Name = @Name OR Code = @Code";
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("Name", name);
-            cmd.Parameters.AddWithValue("Code", code);
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                return true;
-            }
-            return false;
 
-        }
+        //public bool IsExsit(string code, string name)
+        //{
+        //    SqlConnection con = new SqlConnection(ConnectinString);
+        //    con.Open();
+        //    string query = "select * from  Course where Name = @Name OR Code = @Code";
+        //    SqlCommand cmd = new SqlCommand(query, con);
+        //    cmd.Parameters.Clear();
+        //    cmd.Parameters.AddWithValue("Name", name);
+        //    cmd.Parameters.AddWithValue("Code", code);
+        //    SqlDataReader reader = cmd.ExecuteReader();
+        //    if (reader.HasRows)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+
+        //}
 
         public List<Course> GetCourses()
         {
@@ -102,6 +117,7 @@ namespace UniversityManagement.Gateway
                 course.DepartmentId = (int) reader["DepartmentID"];
                 course.SemisterId = (int)reader["SemisterId"];
                 course.Credit =  (decimal) reader["Credit"];
+                course.Id = (int) reader["Id"];
 
                 courses.Add(course);
             }

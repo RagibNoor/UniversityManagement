@@ -22,5 +22,7 @@ namespace UniversityManagement.Models
         [Display(Name = "Course Code")]
 
         public int CourseId { get; set; }
+
+        public decimal CourseCredit { get; set; }
     }
 }
