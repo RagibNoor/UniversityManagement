@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using UniversityManagement.Gateway;
 using UniversityManagement.Models;
+using UniversityManagement.ViewModel;
 
 namespace UniversityManagement.Bll
 {
@@ -50,5 +51,16 @@ namespace UniversityManagement.Bll
         {
             return courseGateway.GetCourses();
         }
+
+        public List<CourseAssignToTeacherView> GetCourseAssignToTeacherViews(int id)
+        {
+            return courseGateway.GetCourseAssignToTeacherViews(id);
+        }
+
+        public List<CourseAssign> GetAssignCourses()
+        {
+            return courseGateway.GetAssignCourses();
+        }
+
     }
 }

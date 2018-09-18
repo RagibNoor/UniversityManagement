@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using UniversityManagement.Bll;
 using UniversityManagement.Models;
+using UniversityManagement.ViewModel;
 
 namespace UniversityManagement.Controllers
 {
@@ -83,5 +84,24 @@ namespace UniversityManagement.Controllers
             var selectedTeacher = teachers.FindAll(a => a.DepartmentId == id).ToList();
             return Json(selectedTeacher, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ViewCourseStatics()
+        {
+            ViewBag.Departments = departmentBll.GetDepartments();
+            return View();
+        }
+
+        public ActionResult ViewCourseAssignToTeacher(int id)
+        {
+            List<CourseAssignToTeacherView> courses = courseBll.GetCourseAssignToTeacherViews(id);
+            return Json(courses, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult IsCourseExist(int Id)
+        {
+            List<CourseAssign> teachers = courseBll.GetAssignCourses();
+            bool isExist = teachers.FirstOrDefault(u => u.CourseId.Equals(Id)) != null;
+            return Json(!isExist, JsonRequestBehavior.AllowGet);
+        }  
 	}
 }

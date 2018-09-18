@@ -182,6 +182,7 @@
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CourseAssignToTeacherView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -239,6 +240,7 @@
     <Content Include="Views\Course\AssignTeacher.cshtml">
       <BrowseToURL>~/Course/AssignTeacher</BrowseToURL>
     </Content>
+    <Content Include="Views\Course\ViewCourseStatics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

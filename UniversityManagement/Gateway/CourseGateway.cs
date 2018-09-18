@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using UniversityManagement.Models;
+using UniversityManagement.ViewModel;
 
 namespace UniversityManagement.Gateway
 {
@@ -49,6 +50,8 @@ namespace UniversityManagement.Gateway
             con.Close();
             return rowCount;
         }
+
+        //save Course
         public int Save(Course course)
         {
             SqlConnection con = new SqlConnection(ConnectinString);
@@ -100,6 +103,7 @@ namespace UniversityManagement.Gateway
 
         //}
 
+        //get Course
         public List<Course> GetCourses()
         {
             SqlConnection con = new SqlConnection(ConnectinString);
@@ -125,5 +129,60 @@ namespace UniversityManagement.Gateway
             con.Close();
             return courses;
         } 
+
+        //Get course assign to teacher
+        public List<CourseAssignToTeacherView> GetCourseAssignToTeacherViews( int id)
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select * from  CourseAssignToTeacher where DepartmentId = '"+id+"' ";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<CourseAssignToTeacherView> courses = new List<CourseAssignToTeacherView>();
+
+            while (reader.Read())
+            {
+                CourseAssignToTeacherView course = new CourseAssignToTeacherView();
+                course.Code = reader["CourseCode"].ToString();
+                course.Name = reader["CourseName"].ToString();
+                course.AssignTo = reader["TeacherName"].ToString();
+                if (course.AssignTo=="")
+                {
+                    course.AssignTo = "Not Assign Yet";
+                }
+                course.Semister = reader["SemisterName"].ToString(); 
+
+                courses.Add(course);
+            }
+            reader.Close();
+            con.Close();
+            return courses;
+        }
+
+        public List<CourseAssign> GetAssignCourses()
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select * from  AssignTeacher";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<CourseAssign> courses = new List<CourseAssign>();
+
+            while (reader.Read())
+            {
+                CourseAssign course = new CourseAssign();
+
+                course.CourseId = (int)reader["CourseId"];
+
+                courses.Add(course);
+            }
+            reader.Close();
+            con.Close();
+            return courses;
+        } 
+
+
+       
+
     }
 }
