@@ -101,7 +101,7 @@ namespace UniversityManagement.Controllers
         {
             List<CourseAssign> teachers = courseBll.GetAssignCourses();
             bool isExist = teachers.FirstOrDefault(u => u.CourseId.Equals(Id)) != null;
-            return Json(!isExist, JsonRequestBehavior.AllowGet);
+            return Json(isExist, JsonRequestBehavior.AllowGet);
         }  
 	}
 }

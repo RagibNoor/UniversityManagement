@@ -67,6 +67,7 @@
             <div class="col-md-8">
                 @Html.DropDownListFor(c => c.CourseId, new SelectList(""), "--Select--", new {@class = "form-control"})
                 @Html.ValidationMessageFor(m => m.CourseId)
+                <span id="CourseIdExist"></span>
             </div>
         </div>
 
@@ -129,11 +130,14 @@
             var remainingCredit ;
             var courses;
             var teachers;
+            var courseIsExist = null;
             $('#DepartmentId').on('change', function () {
                 $('#CourseCredit').val("");
                 $('#CourseName').val("");
                 $('#CreditToBeTaken').val(null);
                 $('#RemainingCredit').val(null);
+                courseIsExist = null;
+                $('#CourseIdExist').html(courseIsExist);
 
 
                 var departmentId = $('#DepartmentId option:selected').val();
@@ -146,7 +150,7 @@
                     url: '@Url.Action("SelectedDepartmentCourse", "Course")',
                     success: function(result) {
                         courses = result;
-                        console.log(courses);
+                       // console.log(courses);
                         var a = '';
                         if (departmentId == null) {
                             $('#CourseId').html(a);
@@ -170,7 +174,7 @@
                     url: '@Url.Action("SelectedDepartmentTeacher", "Course")',
                     success: function(result) {
                         teachers = result;
-                        console.log(teachers);
+                       // console.log(teachers);
                         // Console.log(result);
                         var a = '';
                         if (departmentId == null) {
@@ -188,10 +192,12 @@
                 });
 
             });
-            $('#CourseId').on('change', function() {
+            $('#CourseId').on('change', function () {
+                courseIsExist = null;
+                $('#CourseIdExist').html(courseIsExist);
 
                 var courseId = $('#CourseId option:selected').val();
-                alert(courseId);
+               // alert(courseId);
                 $('#CourseCredit').val("");
                 $('#CourseName').val("");
                 $.each(courses, function(key, value) {
@@ -200,16 +206,39 @@
                         // console.log(value.Id);
                         $('#CourseCredit').val(value.Credit);
                         credit = value.Credit;
-                        console.log(credit);
+                      //  console.log(credit);
                         $('#CourseName').val(value.Name);
-                        console.log((remainingCredit != null));
-                        console.log((creditToBeTaken - credit) < 0);
+                       // console.log((remainingCredit != null));
+                        //console.log((creditToBeTaken - credit) < 0);
                         if (remainingCredit!=null) {
                             if ((creditToBeTaken - credit) < 0) {
                                 $('#myModal').modal('show');
                             }
 
                         }
+                    }
+                });
+                var str = "field-validation-error";
+
+
+                $.ajax({
+                    type: 'GET',
+                    data: { Id: courseId },
+                    url: '@Url.Action("IsCourseExist", "Course")',
+                    success: function (result) {
+                        teachers = result;
+                       // console.log(teachers);
+                        console.log(result);
+                        if (result) {
+                            courseIsExist= "Error" 
+                           // $('#CourseId').find('.field-validation-valid').attr('class', 'field-validation-error');
+                            //$('#CourseId').find('.field-validation-error').html(error);
+                            $('#CourseIdExist').html(courseIsExist);
+                        } else {
+                            $('#CourseIdExist').html(courseIsExist);
+                        }
+                       
+
                     }
                 });
 
@@ -241,7 +270,12 @@
                     }
                 });
             });
-           
+            $("form").submit(function(e) {
+                if (courseIsExist!= null) {
+                    e.preventDefault();
+                }
+            });
+
 
         });
 
