@@ -42,5 +42,8 @@ namespace UniversityManagement.Models
         [Display(Name = "Credit To Be Taken")]
         [Range(0.0, Double.MaxValue , ErrorMessage = "Please input a Positive Number")]
         public decimal CreditToBeTaken { get; set; }
+        public decimal RemainigCredit { get; set; }
+
+
     }
 }

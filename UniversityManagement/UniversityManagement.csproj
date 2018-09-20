@@ -181,11 +181,13 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Designation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IsCourseAlreadyAssign.cs" />
     <Compile Include="Models\Semister.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CourseAssignToTeacherView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -244,8 +246,12 @@
     <Content Include="Views\Course\AssignTeacher.cshtml">
       <BrowseToURL>~/Course/AssignTeacher</BrowseToURL>
     </Content>
+<<<<<<< HEAD
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
+=======
+    <Content Include="Views\Course\ViewCourseStatics.cshtml" />
+>>>>>>> 6d64a9dde76db196bbb8c1b43db8e22022bb18fe
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

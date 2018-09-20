@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using UniversityManagement.Models;
+using UniversityManagement.ViewModel;
 
 namespace UniversityManagement.Gateway
 {
@@ -34,21 +35,37 @@ namespace UniversityManagement.Gateway
             return semisters;
         }
 
+        public int SaveAssignTeacher(CourseAssign course)
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "insert into AssignTeacher(Credit,DepartmentId,CourseId,TeacherId) values(@Credit,@DepartmentId,@CourseId,@TeacherId)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("Credit", course.CourseCredit);
+            cmd.Parameters.AddWithValue("DepartmentId", course.DepartmentId);
+            cmd.Parameters.AddWithValue("CourseId", course.CourseId);
+            cmd.Parameters.AddWithValue("TeacherId", course.TeacherID);
+            int rowCount = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowCount;
+        }
+
+        //save Course
         public int Save(Course course)
         {
-            //SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-NQGNJQ07\SQLEXPRESS;Initial Catalog=StockManagement;Integrated Security=True");
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
             string query;
-            if (course.Description==null)
+            if (course.Description == null)
             {
-                 query = "insert into Course(Name,Code,Credit,DepartmentId,SemisterId) values(@Name,@code,@Credit,@DepartmentId,@SemisterId)";
-                
+                query = "insert into Course(Name,Code,Credit,DepartmentId,SemisterId) values(@Name,@Code,@Credit,@DepartmentId,@SemisterId)";
+
             }
             else
             {
-                 query = "insert into Course(Name,Code,Credit,Description,DepartmentId,SemisterId) values(@Name,@code,@Credit,@Description,@DepartmentId,@SemisterId)";
-                
+                query = "insert into Course(Name,Code,Credit,Description,DepartmentId,SemisterId) values(@Name,@Code,@Credit,@Description,@DepartmentId,@SemisterId)";
+
             }
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.Clear();
@@ -58,7 +75,7 @@ namespace UniversityManagement.Gateway
             if (course.Description != null)
             {
                 cmd.Parameters.AddWithValue("Description", course.Description);
-                
+
             }
             cmd.Parameters.AddWithValue("DepartmentId", course.DepartmentId);
             cmd.Parameters.AddWithValue("SemisterId", course.SemisterId);
@@ -67,24 +84,26 @@ namespace UniversityManagement.Gateway
             return rowCount;
         }
 
-        public bool IsExsit(string code, string name)
-        {
-            SqlConnection con = new SqlConnection(ConnectinString);
-            con.Open();
-            string query = "select * from  Course where Name = @Name OR Code = @Code";
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("Name", name);
-            cmd.Parameters.AddWithValue("Code", code);
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                return true;
-            }
-            return false;
 
-        }
+        //public bool IsExsit(string code, string name)
+        //{
+        //    SqlConnection con = new SqlConnection(ConnectinString);
+        //    con.Open();
+        //    string query = "select * from  Course where Name = @Name OR Code = @Code";
+        //    SqlCommand cmd = new SqlCommand(query, con);
+        //    cmd.Parameters.Clear();
+        //    cmd.Parameters.AddWithValue("Name", name);
+        //    cmd.Parameters.AddWithValue("Code", code);
+        //    SqlDataReader reader = cmd.ExecuteReader();
+        //    if (reader.HasRows)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
 
+        //}
+
+        //get Course
         public List<Course> GetCourses()
         {
             SqlConnection con = new SqlConnection(ConnectinString);
@@ -102,6 +121,7 @@ namespace UniversityManagement.Gateway
                 course.DepartmentId = (int) reader["DepartmentID"];
                 course.SemisterId = (int)reader["SemisterId"];
                 course.Credit =  (decimal) reader["Credit"];
+                course.Id = (int) reader["Id"];
 
                 courses.Add(course);
             }
@@ -109,5 +129,60 @@ namespace UniversityManagement.Gateway
             con.Close();
             return courses;
         } 
+
+        //Get course assign to teacher
+        public List<CourseAssignToTeacherView> GetCourseAssignToTeacherViews( int id)
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select * from  CourseAssignToTeacher where DepartmentId = '"+id+"' ";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<CourseAssignToTeacherView> courses = new List<CourseAssignToTeacherView>();
+
+            while (reader.Read())
+            {
+                CourseAssignToTeacherView course = new CourseAssignToTeacherView();
+                course.Code = reader["CourseCode"].ToString();
+                course.Name = reader["CourseName"].ToString();
+                course.AssignTo = reader["TeacherName"].ToString();
+                if (course.AssignTo=="")
+                {
+                    course.AssignTo = "Not Assign Yet";
+                }
+                course.Semister = reader["SemisterName"].ToString(); 
+
+                courses.Add(course);
+            }
+            reader.Close();
+            con.Close();
+            return courses;
+        }
+
+        public List<CourseAssign> GetAssignCourses()
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select * from  AssignTeacher";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<CourseAssign> courses = new List<CourseAssign>();
+
+            while (reader.Read())
+            {
+                CourseAssign course = new CourseAssign();
+
+                course.CourseId = (int)reader["CourseId"];
+
+                courses.Add(course);
+            }
+            reader.Close();
+            con.Close();
+            return courses;
+        } 
+
+
+       
+
     }
 }

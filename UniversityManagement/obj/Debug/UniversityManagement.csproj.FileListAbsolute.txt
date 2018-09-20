@@ -52,6 +52,7 @@ D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\Microsoft.
 D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.dll
 D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.pdb
+<<<<<<< HEAD
 D:\Dot net C#\Project\UniversityManagement\UniversityManagement\bin\UniversityManagement.dll.config
 D:\Dot net C#\Project\UniversityManagement\UniversityManagement\bin\UniversityManagement.dll
 D:\Dot net C#\Project\UniversityManagement\UniversityManagement\bin\UniversityManagement.pdb
@@ -107,3 +108,6 @@ D:\Dot net C#\Project\UniversityManagement\UniversityManagement\bin\Microsoft.Ow
 D:\Dot net C#\Project\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.csprojResolveAssemblyReference.cache
 D:\Dot net C#\Project\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.dll
 D:\Dot net C#\Project\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.pdb
+=======
+D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.csprojResolveAssemblyReference.cache
+>>>>>>> 6d64a9dde76db196bbb8c1b43db8e22022bb18fe

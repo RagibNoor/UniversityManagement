@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using UniversityManagement.Bll;
 using UniversityManagement.Models;
+using UniversityManagement.ViewModel;
 
 namespace UniversityManagement.Controllers
 {
@@ -12,6 +13,7 @@ namespace UniversityManagement.Controllers
 	{
 		DepartmentBLL departmentBll = new DepartmentBLL();
         CourseBLL courseBll = new CourseBLL();
+        TeacherBLL teacherBll = new TeacherBLL();
         
 		//
 		// GET: /Course/
@@ -56,16 +58,56 @@ namespace UniversityManagement.Controllers
             return Json(!isExist, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult AssignTeacher()
         {
             ViewBag.Departments = departmentBll.GetDepartments();
             return View();
         }
-        public ActionResult SelectedDepartment(int id)
+
+        [HttpPost]
+        public ActionResult AssignTeacher(CourseAssign courseAssign)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Departments = departmentBll.GetDepartments();
+                return View("AssignTeacher");
+            }
+
+            ViewBag.Message = courseBll.SaveAssignTeacher(courseAssign);
+            ViewBag.Departments = departmentBll.GetDepartments();
+            return RedirectToAction("AssignTeacher");
+        }
+        public ActionResult SelectedDepartmentCourse(int id)
         {
             List<Course> courses = courseBll.GetCourses();
-            var selectedCustomer = courses.FindAll(a => a.DepartmentId == id).ToList();
-            return Json(selectedCustomer, JsonRequestBehavior.AllowGet);
+            var selectedCourse = courses.FindAll(a => a.DepartmentId == id).ToList();
+            return Json(selectedCourse, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult SelectedDepartmentTeacher(int id)
+        {
+            List<Teacher> teachers = teacherBll.GetTeachers();
+            var selectedTeacher = teachers.FindAll(a => a.DepartmentId == id).ToList();
+            return Json(selectedTeacher, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ViewCourseStatics()
+        {
+            ViewBag.Departments = departmentBll.GetDepartments();
+            return View();
+        }
+
+        public ActionResult ViewCourseAssignToTeacher(int id)
+        {
+            List<CourseAssignToTeacherView> courses = courseBll.GetCourseAssignToTeacherViews(id);
+            return Json(courses, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult IsCourseExist(int Id)
+        {
+            List<CourseAssign> teachers = courseBll.GetAssignCourses();
+            bool isExist = teachers.FirstOrDefault(u => u.CourseId.Equals(Id)) != null;
+            return Json(isExist, JsonRequestBehavior.AllowGet);
+        }  
 	}
 }

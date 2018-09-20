@@ -32,7 +32,18 @@
                             <li>@Html.ActionLink("View Department", "ViewAllDepartment", "Department")</li>
                         </ul>
                     </li>
-                    <li class="nav-item">@Html.ActionLink("Course", "Save", "Course")</li>
+
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Course
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">@Html.ActionLink("Add Course", "Save", "Course")</li>
+                            
+                            <li class="nav-item">@Html.ActionLink("Course Assign To Teacher", "AssignTeacher", "Course")</li>
+                        </ul>
+                    </li>
                     <li class="nav-item">@Html.ActionLink("Teacher", "Index", "Teacher")</li>
                     <li class="nav-item">@Html.ActionLink("Student","Index","Student")</li>
 

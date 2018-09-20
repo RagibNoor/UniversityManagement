@@ -57,6 +57,25 @@ namespace UniversityManagement.Gateway
             return rowCount;
         }
 
+        public decimal GetRemainingCredit(int id)
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select Credit from AssignTeacher where TeacherID= '" + id + "' ";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            decimal remainingCredit = 0;
+            while (reader.Read())
+            {
+                remainingCredit += (decimal) reader["Credit"];
+            }
+
+            reader.Close();
+            con.Close();
+            return remainingCredit;
+
+        }
+
         public List<Teacher> GetTeachers()
         {
             //SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-NQGNJQ07\SQLEXPRESS;Initial Catalog=StockManagement;Integrated Security=True");
@@ -77,6 +96,9 @@ namespace UniversityManagement.Gateway
                 teacher.DesignationId = Convert.ToInt32(reader["DesignationId"].ToString());
                 teacher.DepartmentId = Convert.ToInt32(reader["DepartmentId"].ToString());
                 teacher.CreditToBeTaken = (decimal) reader["CreditToBeTaken"];
+                teacher.Id = (int)reader["Id"];
+                teacher.RemainigCredit = teacher.CreditToBeTaken - GetRemainingCredit(teacher.Id);
+
 
 
                 teachers.Add(teacher);
