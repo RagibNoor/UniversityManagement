@@ -178,6 +178,7 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Designation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IsCourseAlreadyAssign.cs" />
     <Compile Include="Models\Semister.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -68,6 +68,12 @@ namespace UniversityManagement.Controllers
         [HttpPost]
         public ActionResult AssignTeacher(CourseAssign courseAssign)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Departments = departmentBll.GetDepartments();
+                return View("AssignTeacher");
+            }
+
             ViewBag.Message = courseBll.SaveAssignTeacher(courseAssign);
             ViewBag.Departments = departmentBll.GetDepartments();
             return RedirectToAction("AssignTeacher");

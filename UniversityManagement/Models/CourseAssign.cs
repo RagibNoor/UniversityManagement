@@ -21,7 +21,8 @@ namespace UniversityManagement.Models
        public int DepartmentId { get; set; }
         [Required(ErrorMessage = "This Field Is Required")]
         [Display(Name = "Course Code")]
-        [Remote("IsCourseExist", "Course", ErrorMessage = "Course already Assign")]
+       // [Remote("IsCourseExist", "Course", ErrorMessage = "Course already Assign")]
+        [IsCourseAlreadyAssign(ErrorMessage = "Course Is Already Assign to a Teacher")]
 
         public int CourseId { get; set; }
 
