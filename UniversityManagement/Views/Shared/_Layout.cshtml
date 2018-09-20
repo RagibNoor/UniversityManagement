@@ -34,6 +34,7 @@
                     </li>
                     <li class="nav-item">@Html.ActionLink("Course", "Save", "Course")</li>
                     <li class="nav-item">@Html.ActionLink("Teacher", "Index", "Teacher")</li>
+                    <li class="nav-item">@Html.ActionLink("Student","Index","Student")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -53,9 +54,35 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
 <script src="~/Scripts/wow.min.js"></script>
+
 <script>
     new WOW().init();
-</script>
-    @RenderSection("scripts", required: false)
+    </script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+<script>
+  
+
+          $(document).ready(function () {
+              $("#datepicker").datepicker('setDate', 'today');
+              $("#datepicker").datepicker({
+                  format: 'yyyy-mm-dd',
+           
+          });
+              
+              //$("#datepicker").on("change", function() {
+              //    var formate = $(this).val();
+              //    alert('formate');
+              //});
+          });
+
+
+
+    </script>
+ 
+
+@RenderSection("scripts", required: false)
 </body>
 </html>

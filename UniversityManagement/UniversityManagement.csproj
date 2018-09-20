@@ -160,14 +160,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Bll\CourseBLL.cs" />
     <Compile Include="Bll\DepartmentBLL.cs" />
+    <Compile Include="Bll\StudentBLL.cs" />
     <Compile Include="Bll\TeacherBLL.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Gateway\CourseGateway.cs" />
     <Compile Include="Gateway\DepartmentGateway.cs" />
+    <Compile Include="Gateway\StudentGeteway.cs" />
     <Compile Include="Gateway\TeacherGateway.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,6 +182,7 @@
     <Compile Include="Models\Designation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Semister.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -205,6 +209,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Script.js" />
     <Content Include="Scripts\wow.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -239,6 +244,8 @@
     <Content Include="Views\Course\AssignTeacher.cshtml">
       <BrowseToURL>~/Course/AssignTeacher</BrowseToURL>
     </Content>
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
