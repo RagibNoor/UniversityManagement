@@ -29,7 +29,7 @@ namespace UniversityManagement.Controllers
             StudentGeteway astGeteway=new StudentGeteway();
             string departmentCode = astudentBll.GetDepartmentCode(astudent.DepartmentId);
             string year = astudent.Date.Substring(0, 4);
-            string count = astudentBll.GetNumberOFstudentInaDepartment(astudent.DepartmentId).ToString("000");
+            string count = astudentBll.GetNumberOFstudentInaDepartment(astudent.DepartmentId, year).ToString("000");
 
             astudent.Registration = departmentCode + "-" + year + "-" + count;
             ViewBag.Departments = departmentBll.GetDepartments();
@@ -41,7 +41,11 @@ namespace UniversityManagement.Controllers
 
             return View();
         }
-
+        [HttpGet]
+        public ActionResult StudentEnrollCourse()
+        {
+            return View();
+        }
         [HttpGet]
         public JsonResult IsEmailExist(string email)
         {

@@ -36,6 +36,18 @@ namespace UniversityManagement.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult ViewClassRoomAllocation()
+        {
+            ViewBag.Departments = departmentBll.GetDepartments();
+            return View();
+        }
+
+        public ActionResult ViewCourseAssignToTeacher(int id)
+        {
+            List<ClassRoomAllocationView> courses = classRoomAllocationBll.ViewClassRoomAllocation(id);
+            return Json(courses, JsonRequestBehavior.AllowGet);
+        }
         public List<Weekdays> Weekdayses()
         {
             List<Weekdays> weekdayses =  new List<Weekdays>

@@ -74,5 +74,54 @@ namespace UniversityManagement.Gateway
             return a;
 
         }
+
+        public List<ClassRoomAllocationView> ViewClassRoomAllocation(int id)
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select * from  ClassAllocationView where DepartmentId = '" + id + "' ";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<ClassRoomAllocationView> classRoomAllocationViews = new List<ClassRoomAllocationView>();
+
+            while (reader.Read())
+            {
+                int flag = 0;
+                ClassRoomAllocationView allocationView = new ClassRoomAllocationView();
+                allocationView.Code = reader["Code"].ToString();
+                allocationView.Name = reader["Name"].ToString();
+                allocationView.RoomNo = reader["RoomNo"].ToString();
+                allocationView.StartTime = reader["StartTime"].ToString();
+                allocationView.EndTime = reader["EndTime"].ToString();
+                allocationView.Day = reader["Day"].ToString();
+                if (allocationView.RoomNo !="")
+                {
+                    allocationView.FullShedule = " R NO: " + allocationView.RoomNo + " " +
+                                            allocationView.Day.Substring(0, 3) + ":" + allocationView.StartTime + " - " +
+                                            allocationView.EndTime;
+                }
+
+                foreach (var data in classRoomAllocationViews)
+                {
+                    if (data.Code==allocationView.Code)
+                    {
+                        data.FullShedule += "; </br>" + allocationView.FullShedule;
+                        flag = 1;
+                    }
+                }
+
+                if (flag==0)
+                {
+                    classRoomAllocationViews.Add(allocationView);
+                    
+                }
+
+            }
+            reader.Close();
+            con.Close();
+            return classRoomAllocationViews;
+        }
+
+
     }
 }

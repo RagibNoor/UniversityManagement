@@ -35,5 +35,10 @@ namespace UniversityManagement.Bll
         {
             return caAllocationGateway.TimeIsExist(classRoom);
         }
+
+        public List<ClassRoomAllocationView> ViewClassRoomAllocation(int id)
+        {
+           return caAllocationGateway.ViewClassRoomAllocation(id);
+        }
     }
 }

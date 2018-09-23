@@ -16,9 +16,9 @@ namespace UniversityManagement.Bll
             return astudentGetway.GetDepartmentCode(id);
         }
 
-        public int GetNumberOFstudentInaDepartment(int Id)
+        public int GetNumberOFstudentInaDepartment(int Id , string year)
         {
-            return astudentGetway.GetNumberOFstudentInaDepartment(Id);
+            return astudentGetway.GetNumberOFstudentInaDepartment(Id, year);
         }
 
         public string Save(Student student)

@@ -91,12 +91,12 @@ namespace UniversityManagement.Gateway
         }
 
 
-        public int GetNumberOFstudentInaDepartment(int Id)
+        public int GetNumberOFstudentInaDepartment(int Id , string year)
         {
 
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "SELECT COUNT(Id) FROM Student where DepartmentId='" + Id + "'";
+            string query = "SELECT COUNT(Id) FROM Student where  DepartmentId='" + Id + "' and date between '"+year+"-01-01' and '"+year+"-12-31'";
 
             //string date = student.Date;
             //date1 = date.Substring(6, 4);

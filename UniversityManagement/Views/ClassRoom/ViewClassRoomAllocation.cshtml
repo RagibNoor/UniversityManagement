@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "ViewClassRoomAllocation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">View Class Room Allocation Info</h2>
+<div class="login-form">
+    <div class="row form-group">
+        <div class="col-md-4 text-right">
+            @Html.Label("Department", "Department")
+        </div>
+        <div class="col-md-8">
+            @Html.DropDownList("Department", new SelectList(ViewBag.Departments, "Id", "Name"), "--Select--", new { @class = "form-control" })
+        </div>
+    </div>
+    <h4>View Courses</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">Code</th>
+                <th class="text-center">Name</th>
+                <th class="text-center" style="width: 300px;">Shedule Info</th>
+
+            </tr>
+        </thead>
+        <tbody id="departments"></tbody>
+    </table>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        // Console.log("hello");
+        $(document).ready(function() {
+
+            $('#Department').on('change', function () {
+
+
+
+                var departmentId = $('#Department option:selected').val();
+
+                $.ajax({
+                    type: 'GET',
+                    data: { Id: departmentId },
+                    url: '@Url.Action("ViewCourseAssignToTeacher", "ClassRoom")',
+                    success: function (result) {
+                        console.log(result);
+                        var a = '';
+                        if (departmentId == null) {
+                            $('#CourseId').html(a);
+                        } else {
+
+                            for (var i = 0; i < result.length; i++) {
+                                if (result[i].FullShedule == null) {
+                                    result[i].FullShedule = "Not Sheduled yet";
+                                }
+                                a += '<tr> <td>' + result[i].Code + ' </td>' +
+                                    '<td>' + result[i].Name + ' </td>' +
+                                     '<td>' + result[i].FullShedule + ' </tr>';
+
+                            }
+                            $('#departments').html(a);
+
+                        }
+
+                    }
+                });
+                //teacher
+
+
+            });
+
+
+
+
+
+
+        });
+
+    </script>
+}
+
