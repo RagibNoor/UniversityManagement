@@ -158,16 +158,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Bll\ClassRoomAllocationBLL.cs" />
     <Compile Include="Bll\CourseBLL.cs" />
     <Compile Include="Bll\DepartmentBLL.cs" />
     <Compile Include="Bll\StudentBLL.cs" />
     <Compile Include="Bll\TeacherBLL.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClassRoomAllocationController.cs" />
+    <Compile Include="Controllers\ClassRoomController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Gateway\ClassRoomAllocationGateway.cs" />
     <Compile Include="Gateway\CourseGateway.cs" />
     <Compile Include="Gateway\DepartmentGateway.cs" />
     <Compile Include="Gateway\StudentGeteway.cs" />
@@ -176,6 +180,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ClassRoom.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseAssign.cs" />
     <Compile Include="Models\Department.cs" />
@@ -188,6 +193,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CourseAssignToTeacherView.cs" />
+    <Compile Include="ViewModel\Room.cs" />
+    <Compile Include="ViewModel\Weekdays.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -201,9 +208,11 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\datepair.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.datepair.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -246,15 +255,14 @@
     <Content Include="Views\Course\AssignTeacher.cshtml">
       <BrowseToURL>~/Course/AssignTeacher</BrowseToURL>
     </Content>
-<<<<<<< HEAD
-    <Content Include="Views\Student\Index.cshtml" />
-    <Content Include="Views\Student\Create.cshtml" />
-=======
     <Content Include="Views\Course\ViewCourseStatics.cshtml" />
->>>>>>> 6d64a9dde76db196bbb8c1b43db8e22022bb18fe
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\ClassRoom\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ClassRoomAllocation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

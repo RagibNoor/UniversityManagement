@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Css", required: false)
     <link href="~/Content/animate.css" rel="stylesheet" />
 
 </head>
@@ -71,28 +72,7 @@
     </script>
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
-<script>
-  
 
-          $(document).ready(function () {
-              $("#datepicker").datepicker('setDate', 'today');
-              $("#datepicker").datepicker({
-                  format: 'yyyy-mm-dd',
-           
-          });
-              
-              //$("#datepicker").on("change", function() {
-              //    var formate = $(this).val();
-              //    alert('formate');
-              //});
-          });
-
-
-
-    </script>
- 
 
 @RenderSection("scripts", required: false)
 </body>

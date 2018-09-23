@@ -71,7 +71,7 @@
 
             <div class="col-md-8">
 
-                @Html.TextBoxFor(c => c.Date, new { id = "datepicker", @class = "form-control " })
+                @Html.TextBoxFor(c => c.Date, new {id = "datepicker", @class = "form-control " ,data_provide="datepicker", data_date_format="yyyy-mm-dd"})
 
 
                 @Html.ValidationMessageFor(m => m.Date)
@@ -116,6 +116,33 @@
 
     }
 </div>
+@section Css
+{
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+    
+}
+@section scripts
+{
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        $("#datepicker").datepicker('setDate', 'today');
+        $("#datepicker").datepicker({
+            format: 'yyyy-mm-dd',
+
+        });
+
+        //$("#datepicker").on("change", function() {
+        //    var formate = $(this).val();
+        //    alert('formate');
+        //});
+    });
 
 
 
+</script>
+
+
+}

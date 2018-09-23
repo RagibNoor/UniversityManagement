@@ -11,12 +11,15 @@ namespace UniversityManagement.Bll
     {
          StudentGeteway astudentGetway = new StudentGeteway();
 
-        public Department GetDepartmentCode(Student student)
+        public string GetDepartmentCode(int id)
         {
-            return astudentGetway.GetDepartmentCode(student);
+            return astudentGetway.GetDepartmentCode(id);
         }
 
-    
+        public int GetNumberOFstudentInaDepartment(int Id)
+        {
+            return astudentGetway.GetNumberOFstudentInaDepartment(Id);
+        }
 
         public string Save(Student student)
         {

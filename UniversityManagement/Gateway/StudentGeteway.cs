@@ -22,7 +22,7 @@ namespace UniversityManagement.Gateway
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
             string query =
-                "insert into Student(Name,Eamil,Address,ContactNumber,DepartmentId,Date) values(@StudentName,@Email,@Address,@ContactNumber,@DepartmentId, @Date)";
+                "insert into Student(Name,Eamil,Address,ContactNumber,DepartmentId,Date,RegisterNo) values(@StudentName,@Email,@Address,@ContactNumber,@DepartmentId, @Date,@RegisterNo)";
 
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.Clear();
@@ -32,6 +32,7 @@ namespace UniversityManagement.Gateway
             cmd.Parameters.AddWithValue("ContactNumber", student.ContactNumber);
             cmd.Parameters.AddWithValue("DepartmentId", student.DepartmentId);
             cmd.Parameters.AddWithValue("Date", student.Date);
+            cmd.Parameters.AddWithValue("RegisterNo", student.Registration);
 
             int rowCount = cmd.ExecuteNonQuery();
             con.Close();
@@ -65,31 +66,55 @@ namespace UniversityManagement.Gateway
         }
 
 
-        public Department GetDepartmentCode(Student student)
+        public string GetDepartmentCode(int Id)
         {
 
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "select * from  Deparment where Id='" + student.DepartmentId + "'";
+            string query = "select * from  Deparment where Id='" + Id + "'";
 
-            string date = student.Date;
-            date1 = date.Substring(6, 4);
+            //string date = student.Date;
+            //date1 = date.Substring(6, 4);
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
-            Department aDepartment = new Department();
+            string departmentCode = null;
             while (reader.Read())
             {
 
-                aDepartment.Code = reader["Code"].ToString();
+                departmentCode = reader["Code"].ToString();
 
             }
 
             con.Close();
-            return aDepartment;
+            return departmentCode;
 
         }
 
 
+        public int GetNumberOFstudentInaDepartment(int Id)
+        {
+
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "SELECT COUNT(Id) FROM Student where DepartmentId='" + Id + "'";
+
+            //string date = student.Date;
+            //date1 = date.Substring(6, 4);
+            SqlCommand cmd = new SqlCommand(query, con);
+           // SqlDataReader reader = cmd.ExecuteReader();
+            object value = cmd.ExecuteScalar();
+            int a = 1;
+            if (value != null)
+            {
+                a += (int) value;
+
+            }
+         
+
+            con.Close();
+            return a;
+
+        }
 
       
     }

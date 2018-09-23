@@ -1,0 +1,160 @@
+﻿@model UniversityManagement.Models.ClassRoom
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+
+   
+}
+<h2> @ViewBag.Message</h2>
+<div class="headingStyle">
+    <span class="top right"></span>
+    <span class="top left"></span>
+    <h2>Room Allocation</h2>
+    <span class="bottom right"></span>
+    <span class="bottom left"></span>
+</div>
+
+<div class="login-form">
+    <form id="DepartmentForm" method="POST" class="wow slideInDown" data-wow-duration="2s" data-wow-offset="0">
+        <!--Department-->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.DepartmentId)
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.DepartmentId, new SelectList(ViewBag.Departments, "Id", "Name"), "--Select--", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.DepartmentId)
+            </div>
+        </div>
+
+        <!--Course-->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.CourseId)
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.CourseId, new SelectList(""), "--Select--", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.CourseId)
+            </div>
+        </div>
+
+        <!--Rooms-->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.RoomId)
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.RoomId, new SelectList(ViewBag.Rooms, "Id", "RoomNo"), "--Select--", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.RoomId)
+            </div>
+        </div>
+        <!--day-->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.Day)
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.Day, new SelectList(ViewBag.days, "Name", "Name"), "--Select--", new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Day)
+            </div>
+        </div>
+        
+
+        
+        <!--End-->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.Label("timeOnlyExample", " Time start")
+                <br/>
+                <br/>
+                <br/>
+                @Html.Label("timeOnlyExample", " Time end")
+            </div>
+            <div class="col-md-8">
+
+                <div id="timeOnlyExample">
+                    @Html.TextBoxFor(a => a.StartTime, new { @class = "time start form-control" })
+                    @Html.ValidationMessageFor(m => m.StartTime)
+
+
+                    <br/>
+                    @Html.TextBoxFor(a => a.EndTime, new { @class = "time end form-control" })
+                    @Html.ValidationMessageFor(m => m.EndTime)
+
+
+                    @*<input type="text" class="time start form-control " name="StartTime" placeholder="From"/> <br/>
+                    <input type="text" class="time end form-control " name="EndTime" placeholder="To"/>*@
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="Allocate" class="btn btn-info" id="submitBtn" />
+
+            </div>
+
+        </div>
+    </form>
+</div>
+@section scripts
+{
+    <script src="https://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css"/>
+
+    <script src="~/Scripts/datepair.js"></script>
+    <script src="~/Scripts/jquery.datepair.js"></script>
+
+    <script>
+
+
+        $('#timeOnlyExample .time').timepicker({
+            'showDuration': true,
+            'timeFormat': 'g:ia'
+        });
+
+        var timeOnlyExampleEl = document.getElementById('timeOnlyExample');
+        var timeOnlyDatepair = new Datepair(timeOnlyExampleEl);
+        $(document).ready(function () {
+            $('#DepartmentId').on('change', function () {
+                var departmentId = $('#DepartmentId option:selected').val();
+               
+                $.ajax({
+                    type: 'GET',
+                    data: { Id: departmentId },
+                    url: '@Url.Action("SelectedDepartmentCourse", "Course")',
+                    success: function (result) {
+                        courses = result;
+                        // console.log(courses);
+                        var a = '<option value="">--Select--</option>';
+                        if (departmentId == null) {
+                            $('#CourseId').html(a);
+                        } else {
+                            a = '<option value="">--Select--</option>';
+
+                            for (var i = 0; i < result.length; i++) {
+                                a += '<option value="' + result[i].Id + '">' + result[i].Code + '</option>';
+
+                            }
+                            $('#CourseId').html(a);
+
+                        }
+
+                    }
+                });
+              
+
+            });
+        });
+
+    </script>
+
+}

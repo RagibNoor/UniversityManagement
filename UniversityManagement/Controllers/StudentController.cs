@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using UniversityManagement.Bll;
 using UniversityManagement.Gateway;
 using UniversityManagement.Models;
@@ -26,8 +27,13 @@ namespace UniversityManagement.Controllers
         public ActionResult Index(Student astudent)
         {
             StudentGeteway astGeteway=new StudentGeteway();
+            string departmentCode = astudentBll.GetDepartmentCode(astudent.DepartmentId);
+            string year = astudent.Date.Substring(0, 4);
+            string count = astudentBll.GetNumberOFstudentInaDepartment(astudent.DepartmentId).ToString("000");
+
+            astudent.Registration = departmentCode + "-" + year + "-" + count;
             ViewBag.Departments = departmentBll.GetDepartments();
-            ViewBag.Departmentcode = astudentBll.GetDepartmentCode(astudent);
+            
             ViewBag.Message = astudentBll.Save(astudent);
             
          // GET: Employees/Create

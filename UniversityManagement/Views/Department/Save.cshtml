@@ -24,6 +24,7 @@
             </div>
             <div class="col-md-8">
                 @Html.TextBoxFor(a => a.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a=>a.Name)
 
             </div>
         </div>
@@ -36,6 +37,9 @@
 
             <div class="col-md-8">
                 @Html.TextBoxFor(a => a.Code, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Code)
+
+
             </div>
 
         </div>
