@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using UniversityManagement.Models;
+using UniversityManagement.ViewModel;
 
 namespace UniversityManagement.Gateway
 {
@@ -38,6 +39,26 @@ namespace UniversityManagement.Gateway
             con.Close();
             return rowCount;
         }
+        public int SaveStudentEnrollCourse(StudentEnrollCourse student)
+        {
+            //SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-NQGNJQ07\SQLEXPRESS;Initial Catalog=StockManagement;Integrated Security=True");
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query =
+                "insert into StudentEnrollCourse(StudentId,CourseId,Date,DepartmentId) values(@StudentId,@CourseId,@Date,@DepartmentId)";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("StudentId", student.StudentId);
+            cmd.Parameters.AddWithValue("CourseId", student.CourseId);
+            cmd.Parameters.AddWithValue("DepartmentId", student.DepartmentId);
+            cmd.Parameters.AddWithValue("Date", student.Date);
+
+            int rowCount = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowCount;
+        }
+
 
         public List<Student> GetEmail()
         {
@@ -54,6 +75,36 @@ namespace UniversityManagement.Gateway
 
                 student.Email = reader["Eamil"].ToString();
                 student.Name = reader["Name"].ToString();
+
+
+
+                Students.Add(student);
+
+            }
+            reader.Close();
+            con.Close();
+            return Students;
+        }
+
+        public List<StudentView> GetStudents()
+        {
+
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select * from  StudentWithDepartmentView";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<StudentView> Students = new List<StudentView>();
+            while (reader.Read())
+            {
+                StudentView student = new StudentView();
+
+                student.Email = reader["Eamil"].ToString();
+                student.Name = reader["Name"].ToString();
+                student.RegNo = reader["RegisterNo"].ToString();
+                student.DepartmentName = reader["Department"].ToString();
+                student.DepartmentId = (int) reader["DepartmentId"];
+                student.Id = (int) reader["Id"];
 
 
 
@@ -84,7 +135,7 @@ namespace UniversityManagement.Gateway
                 departmentCode = reader["Code"].ToString();
 
             }
-
+            reader.Close();
             con.Close();
             return departmentCode;
 
@@ -110,6 +161,23 @@ namespace UniversityManagement.Gateway
 
             }
          
+
+            con.Close();
+            return a;
+
+        }
+        public bool IsCourseEnrolled(int studentId , int courseId)
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "Select Count(Id) from StudentEnrollCourse where StudentId ='" + studentId + "' and CourseId ='" + courseId + "'";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            var find =(int) cmd.ExecuteScalar();
+            bool a = find>0;
+
+            //SqlDataReader reader = cmd.ExecuteReader();
 
             con.Close();
             return a;

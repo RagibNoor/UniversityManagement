@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using UniversityManagement.Gateway;
 using UniversityManagement.Models;
+using UniversityManagement.ViewModel;
 
 namespace UniversityManagement.Bll
 {
@@ -38,6 +39,21 @@ namespace UniversityManagement.Bll
         public List<Student> GetEmail()
         {
             return astudentGetway.GetEmail();
+        }
+
+        public List<StudentView> GetStudents()
+        {
+            return astudentGetway.GetStudents();
+        }
+
+        public int SaveStudentEnrollCourse(StudentEnrollCourse student)
+        {
+            return astudentGetway.SaveStudentEnrollCourse(student);
+        }
+
+        public bool  IsCourseEnrolled(int studentId , int courseId)
+        {
+            return astudentGetway.IsCourseEnrolled(studentId, courseId);
         }
     }
 

@@ -7,11 +7,13 @@ using System.Web.Services.Description;
 using UniversityManagement.Bll;
 using UniversityManagement.Gateway;
 using UniversityManagement.Models;
+using UniversityManagement.ViewModel;
 
 namespace UniversityManagement.Controllers
 {
     public class StudentController : Controller
     {
+        
         private StudentBLL astudentBll = new StudentBLL();
         private DepartmentBLL departmentBll = new DepartmentBLL();
         //
@@ -44,7 +46,29 @@ namespace UniversityManagement.Controllers
         [HttpGet]
         public ActionResult StudentEnrollCourse()
         {
+            ViewBag.Student = astudentBll.GetStudents();
             return View();
+        }
+        [HttpPost]
+        public ActionResult StudentEnrollCourse(StudentEnrollCourse studentEnrollCourse)
+        {
+            if (astudentBll.SaveStudentEnrollCourse(studentEnrollCourse)>0)
+            {
+                ViewBag.Message = "Save";
+            }
+            ViewBag.Student = astudentBll.GetStudents();
+            return View();
+        }
+        public ActionResult IsCourseEnrolled(int studentId , int courseId)
+        {
+            var result = astudentBll.IsCourseEnrolled(studentId, courseId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SelectedStudentInfo(int id)
+        {
+            List<StudentView> student = astudentBll.GetStudents();
+            StudentView selectedStudent = student.SingleOrDefault(a => a.Id == id);
+            return Json(selectedStudent, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public JsonResult IsEmailExist(string email)

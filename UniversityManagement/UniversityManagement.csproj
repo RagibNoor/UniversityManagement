@@ -195,6 +195,7 @@
     <Compile Include="ViewModel\ClassRoomAllocationView.cs" />
     <Compile Include="ViewModel\CourseAssignToTeacherView.cs" />
     <Compile Include="ViewModel\Room.cs" />
+    <Compile Include="ViewModel\StudentView.cs" />
     <Compile Include="ViewModel\Weekdays.cs" />
   </ItemGroup>
   <ItemGroup>
