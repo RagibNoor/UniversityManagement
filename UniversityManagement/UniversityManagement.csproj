@@ -194,7 +194,9 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\ClassRoomAllocationView.cs" />
     <Compile Include="ViewModel\CourseAssignToTeacherView.cs" />
+    <Compile Include="ViewModel\Grade.cs" />
     <Compile Include="ViewModel\Room.cs" />
+    <Compile Include="ViewModel\StudentEnrollCourseView.cs" />
     <Compile Include="ViewModel\StudentView.cs" />
     <Compile Include="ViewModel\Weekdays.cs" />
   </ItemGroup>
@@ -263,6 +265,7 @@
     <Content Include="Views\ClassRoom\Index.cshtml" />
     <Content Include="Views\ClassRoom\ViewClassRoomAllocation.cshtml" />
     <Content Include="Views\Student\StudentEnrollCourse.cshtml" />
+    <Content Include="Views\Student\AssignGrade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

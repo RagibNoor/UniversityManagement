@@ -1,0 +1,183 @@
+﻿@model UniversityManagement.Models.StudentEnrollCourse
+
+@{
+    ViewBag.Title = "AssignGrade";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="headingStyle">
+    <span class="top right"></span>
+    <span class="top left"></span>
+    <h2>Assign Grade</h2>
+    <span class="bottom right"></span>
+    <span class="bottom left"></span>
+</div>
+<h2>@ViewBag.Message</h2>
+<div class="login-form ">
+    <form id="StudentEnrollCourse" method="POST" class="wow slideIn" data-wow-duration="2s" data-wow-offset="0">
+        <!--Student Registration -->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.StudentId)
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.StudentId, new SelectList(ViewBag.Student, "Id", "RegNo"), "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.StudentId)
+            </div>
+        </div>
+
+        <!--Name-->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.Label("Name", "Name")
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBox("Name", null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <!--Email-->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.Label("Email", "Email")
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBox("Email", null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <!--Department-->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.Label("Department", "Department")
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBox("Department", null, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <!--Course -->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.CourseId)
+            </div>
+
+            <div class="col-md-8">
+                @Html.DropDownListFor(c => c.CourseId, new SelectList(""), "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CourseId)
+                <span id="CourseIdExist"></span>
+            </div>
+        </div>
+
+        <!--date -->
+        <div class="row form-group">
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(m => m.Grade)
+            </div>
+
+
+            <div class="col-md-8">
+                
+                @Html.DropDownListFor(c => c.Grade, new SelectList(ViewBag.Grade, "Grade", "Grade"), "--Select--", new { @class = "form-control" })
+
+
+
+
+                @Html.ValidationMessageFor(m => m.Grade)
+            </div>
+        </div>
+        @Html.HiddenFor(a => a.DepartmentId)
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="Save" class="btn btn-info" />
+
+            </div>
+
+        </div>
+    </form>
+</div>
+@section scripts
+{
+    <script>
+
+
+        $(document).ready(function() {
+           
+            var departmentId = 0;
+            var courseIsExist = null;
+         
+            $('#DepartmentId').on('change', function () {
+                console.log(departmentId);
+                courseIsExist = null;
+              
+
+            });
+
+            var studentId = 0;
+            $('#StudentId').on('change', function() {
+                 studentId = $('#StudentId option:selected').val();
+                $('#Name').val("");
+                $('#Email').val("");
+                $('#Department').val("");
+                $('#DepartmentId').val("");
+
+                $.ajax({
+                    type: 'GET',
+                    data: { Id: studentId },
+                    url: '@Url.Action("SelectedStudentInfo", "Student")',
+                    success: function(result) {
+                        console.log(result);
+
+                        $('#Name').val(result.Name);
+                        $('#Email').val(result.Email);
+                        $('#Department').val(result.DepartmentName);
+                        departmentId = result.DepartmentId;
+                        $('#DepartmentId').val(result.DepartmentId).trigger('change');
+
+
+                    }
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    data: { Id: studentId },
+                    url: '@Url.Action("SelectedStudentCourseEnroll", "Student")',
+                    success: function (result) {
+
+                        //   console.log(result);
+                        var a = '<option value="">--Select--</option>';
+                        if (departmentId == null) {
+                            $('#CourseId').html(a);
+                        } else {
+                            a = '<option value="">--Select--</option>';
+
+                            for (var i = 0; i < result.length; i++) {
+                                a += '<option value="' + result[i].CourseId + '">' + result[i].CourseName + '</option>';
+
+                            }
+                            $('#CourseId').html(a);
+
+                        }
+
+                    }
+                });
+
+               // console.log(departmentId);
+
+
+
+            });
+
+
+         
+          
+         
+
+        });
+    </script>
+
+
+}

@@ -59,7 +59,24 @@ namespace UniversityManagement.Gateway
             return rowCount;
         }
 
+        public int UpdateGrade(StudentEnrollCourse student)
+        {
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query =
+                "Update StudentEnrollCourse set Grade = @Grade where StudentId = @StudentId And CourseId = @CourseId ";
 
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("Grade", student.Grade);
+
+            cmd.Parameters.AddWithValue("StudentId", student.StudentId);
+            cmd.Parameters.AddWithValue("CourseId", student.CourseId);
+
+            int rowCount = cmd.ExecuteNonQuery();
+            con.Close();
+            return rowCount;
+        }
         public List<Student> GetEmail()
         {
 
@@ -138,6 +155,34 @@ namespace UniversityManagement.Gateway
             reader.Close();
             con.Close();
             return departmentCode;
+
+        }
+        public List<StudentEnrollCourseView> GetSelectedStudetEnrollCourse(int Id)
+        {
+
+            SqlConnection con = new SqlConnection(ConnectinString);
+            con.Open();
+            string query = "select * from  StudentEnrollCourseView where StudentId='" + Id + "'";
+
+            //string date = student.Date;
+            //date1 = date.Substring(6, 4);
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<StudentEnrollCourseView> students = new List<StudentEnrollCourseView>();
+            while (reader.Read())
+            {
+                StudentEnrollCourseView student = new StudentEnrollCourseView();
+                student.CourseName = reader["CourseCode"].ToString();
+                student.CourseCode = reader["CourseName"].ToString();
+                student.Grade = reader["Grade"].ToString();
+                student.CourseId = Convert.ToInt32(reader["CourseId"].ToString());
+
+                students.Add(student);
+
+            }
+            reader.Close();
+            con.Close();
+            return students;
 
         }
 

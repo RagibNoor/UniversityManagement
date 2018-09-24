@@ -77,6 +77,47 @@ namespace UniversityManagement.Controllers
             bool isExist = students.FirstOrDefault(u => u.Email.ToLowerInvariant().Equals(email.ToLower())) != null;
             return Json(!isExist, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public ActionResult AssignGrade()
+        {
+            ViewBag.Student = astudentBll.GetStudents();
+            ViewBag.Grade = GetGrades();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AssignGrade(StudentEnrollCourse student)
+        {
+            ViewBag.Message = astudentBll.UpdateGrade(student);
+            ViewBag.Student = astudentBll.GetStudents();
+            ViewBag.Grade = GetGrades();
+            return View();
+        }
+        public ActionResult SelectedStudentCourseEnroll(int Id)
+        {
+            List<StudentEnrollCourseView> student = astudentBll.GetSelectedStudetEnrollCourse(Id);
+            return Json(student, JsonRequestBehavior.AllowGet);
+        }
+        public List<Grades> GetGrades()
+        {
+          List<Grades> grades = new List<Grades>
+            {
+                new Grades{Grade = "A+"},
+                new Grades{Grade = "A"},
+                new Grades{Grade = "A-"},
+                new Grades{Grade = "B+"},
+                new Grades{Grade = "B"},
+                new Grades{Grade = "B-"},
+                new Grades{Grade = "C+"},
+                new Grades{Grade = "C"},
+                new Grades{Grade = "C-"},
+                new Grades{Grade = "D+"},
+                new Grades{Grade = "D"},
+                new Grades{Grade = "D-"},
+                new Grades{Grade = "F"},
+            };
+            return grades;
+
+        } 
 
 
 

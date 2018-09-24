@@ -20,5 +20,8 @@ namespace UniversityManagement.Models
         [Required(ErrorMessage = "This Field Is Required")]
 
         public string Date { get; set; }
+        [Required(ErrorMessage = "This Field Is Required")]
+
+        public string Grade { get; set; }
     }
 }

@@ -55,6 +55,23 @@ namespace UniversityManagement.Bll
         {
             return astudentGetway.IsCourseEnrolled(studentId, courseId);
         }
+
+        public List<StudentEnrollCourseView> GetSelectedStudetEnrollCourse(int id)
+        {
+            return astudentGetway.GetSelectedStudetEnrollCourse(id);
+        }
+
+        public string UpdateGrade(StudentEnrollCourse student)
+        {
+            if (astudentGetway.UpdateGrade(student) > 0)
+            {
+                return "Save";
+            }
+            else
+            {
+                return "Error";
+            }
+        }
     }
 
 }
