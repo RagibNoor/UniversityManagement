@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.0.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -168,11 +172,13 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResetController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Gateway\ClassRoomAllocationGateway.cs" />
     <Compile Include="Gateway\CourseGateway.cs" />
     <Compile Include="Gateway\DepartmentGateway.cs" />
+    <Compile Include="Gateway\ResetGateway.cs" />
     <Compile Include="Gateway\StudentGeteway.cs" />
     <Compile Include="Gateway\TeacherGateway.cs" />
     <Compile Include="Global.asax.cs">
@@ -266,6 +272,9 @@
     <Content Include="Views\ClassRoom\ViewClassRoomAllocation.cshtml" />
     <Content Include="Views\Student\StudentEnrollCourse.cshtml" />
     <Content Include="Views\Student\AssignGrade.cshtml" />
+    <Content Include="Views\Student\ViewResult.cshtml" />
+    <Content Include="Views\Reset\UnAssignCourses.cshtml" />
+    <Content Include="Views\Reset\UnalocateClassroom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

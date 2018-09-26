@@ -11,7 +11,7 @@
     <span class="bottom left"></span>
 </div>
 
-<h2>@ViewBag.Message</h2>
+
 <div class="login-form ">
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "SaveTeacher", @class = "wow slideInDown", data_wow_duration = "2s", data_wow_offset = "0" }))
     {
@@ -108,6 +108,7 @@
                 <input type="submit" value="Save" class="btn btn-info"/>
 
             </div>
+             <label class="label label-success">@ViewBag.Message</label>
 
         </div>
         

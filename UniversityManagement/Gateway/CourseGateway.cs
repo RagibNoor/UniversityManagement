@@ -39,7 +39,7 @@ namespace UniversityManagement.Gateway
         {
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "insert into AssignTeacher(Credit,DepartmentId,CourseId,TeacherId) values(@Credit,@DepartmentId,@CourseId,@TeacherId)";
+            string query = "insert into AssignTeacher(Credit,DepartmentId,CourseId,TeacherId,Status) values(@Credit,@DepartmentId,@CourseId,@TeacherId,'True')";
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("Credit", course.CourseCredit);
@@ -135,7 +135,7 @@ namespace UniversityManagement.Gateway
         {
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "select * from  CourseAssignToTeacher where DepartmentId = '"+id+"' ";
+            string query = "select * from  CourseAssignToTeacher where Status = 'True' And DepartmentId = '"+id+"' ";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
             List<CourseAssignToTeacherView> courses = new List<CourseAssignToTeacherView>();
@@ -163,7 +163,7 @@ namespace UniversityManagement.Gateway
         {
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "select * from  AssignTeacher";
+            string query = "select * from  AssignTeacher where Status = 'True'";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
             List<CourseAssign> courses = new List<CourseAssign>();

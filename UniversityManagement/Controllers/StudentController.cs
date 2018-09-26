@@ -97,6 +97,13 @@ namespace UniversityManagement.Controllers
             List<StudentEnrollCourseView> student = astudentBll.GetSelectedStudetEnrollCourse(Id);
             return Json(student, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ViewResult()
+        {
+            ViewBag.Student = astudentBll.GetStudents();
+
+            return View();
+        }
         public List<Grades> GetGrades()
         {
           List<Grades> grades = new List<Grades>

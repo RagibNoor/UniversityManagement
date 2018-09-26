@@ -29,8 +29,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Create Department", "Save", "Department")</li>
-                            <li>@Html.ActionLink("View Department", "ViewAllDepartment", "Department")</li>
+                            <li class="nav-item">@Html.ActionLink("Create Department", "Save", "Department")</li>
+                            <li class="nav-item">@Html.ActionLink("View Department", "ViewAllDepartment", "Department")</li>
                         </ul>
                     </li>
 
@@ -43,18 +43,41 @@
                             <li class="nav-item">@Html.ActionLink("Add Course", "Save", "Course")</li>
                             
                             <li class="nav-item">@Html.ActionLink("Course Assign To Teacher", "AssignTeacher", "Course")</li>
+                            <li class="nav-item">@Html.ActionLink("View Course Static", "ViewCourseStatics", "Course")</li>
                         </ul>
                     </li>
                     <li class="nav-item">@Html.ActionLink("Teacher", "Index", "Teacher")</li>
-                    <li class="nav-item">@Html.ActionLink("Student", "Index", "Student")</li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Student
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">@Html.ActionLink("Student Registration", "Index", "Student")</li>
+                            <li class="nav-item">@Html.ActionLink("Course Enroll", "StudentEnrollCourse", "Student")</li>
+                            <li class="nav-item">@Html.ActionLink("Assign Grade", "AssignGrade", "Student")</li>
+                            <li class="nav-item">@Html.ActionLink("View Result", "ViewResult", "Student")</li>
+                        </ul>
+                    </li>
                     <li class="dropdown nav-item">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Room Allocation
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Room Allocation", "Index", "ClassRoom")</li>
-                            <li>@Html.ActionLink("View Room Allocation", "ViewClassRoomAllocation", "ClassRoom")</li>
+                            <li class="nav-item">@Html.ActionLink("Room Allocation", "Index", "ClassRoom")</li>
+                            <li class="nav-item">@Html.ActionLink("View Room Allocation", "ViewClassRoomAllocation", "ClassRoom")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Reset
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">@Html.ActionLink("Unallocate Classroom", "UnalocateClassroom", "Reset")</li>
+                            <li class="nav-item">@Html.ActionLink("Unassign Courses", "UnAssignCourses", "Reset")</li>
                         </ul>
                     </li>
 

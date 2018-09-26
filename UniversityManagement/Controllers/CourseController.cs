@@ -76,7 +76,7 @@ namespace UniversityManagement.Controllers
 
             ViewBag.Message = courseBll.SaveAssignTeacher(courseAssign);
             ViewBag.Departments = departmentBll.GetDepartments();
-            return RedirectToAction("AssignTeacher");
+            return View();
         }
         public ActionResult SelectedDepartmentCourse(int id)
         {

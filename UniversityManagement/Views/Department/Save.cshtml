@@ -16,7 +16,20 @@
 <div class="login-form">
     <form id="DepartmentForm" method="POST" class="wow slideInDown" data-wow-duration="2s" data-wow-offset="0">
 
+        <div class="row form-group">
 
+            <div class="col-md-4 text-right">
+                @Html.LabelFor(a => a.Code)
+            </div>
+
+            <div class="col-md-8">
+                @Html.TextBoxFor(a => a.Code, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Code)
+
+
+            </div>
+
+        </div>
 
         <div class="row form-group">
             <div class="col-md-4 text-right">
@@ -29,20 +42,7 @@
             </div>
         </div>
 
-        <div class="row form-group">
-
-            <div class="col-md-4 text-right">
-                @Html.LabelFor(a => a.Name)
-            </div>
-
-            <div class="col-md-8">
-                @Html.TextBoxFor(a => a.Code, new { @class = "form-control" })
-                @Html.ValidationMessageFor(a => a.Code)
-
-
-            </div>
-
-        </div>
+      
 
 
         <div class="row">
@@ -50,7 +50,7 @@
                 <input type="submit" value="Save" class="btn btn-info" />
 
             </div>
-
+        <label class="label label-success">@ViewBag.Message</label>
         </div>
 
     </form>
