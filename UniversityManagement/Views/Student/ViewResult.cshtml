@@ -8,13 +8,14 @@
 <div class="headingStyle">
     <span class="top right"></span>
     <span class="top left"></span>
-    <h2>Enroll Courses</h2>
+    <h2>View Result</h2>
     <span class="bottom right"></span>
     <span class="bottom left"></span>
 </div>
-
 <div class="login-form ">
-    <form id="StudentEnrollCourse" method="POST" class="wow slideInDown" data-wow-duration="2s" data-wow-offset="0">
+    @using (Html.BeginForm("Export", "Student", FormMethod.Post, new { @class = "wow slideInDown", data_wow_duration = "2s", data_wow_offset = "0" }))
+    {
+
         <!--Student Registration -->
         <div class="row form-group">
             <div class="col-md-4 text-right">
@@ -64,33 +65,47 @@
         @Html.HiddenFor(a => a.DepartmentId)
         <div class="row">
             <div class="col-md-12 text-right">
-                <input type="Button" value="Make PDF" class="btn btn-info" />
-
+                @*<input type="Button" value="Make PDF" class="btn btn-info" />*@
+                <input type="hidden" name="GridHtml" />
+                <input type="submit" id="btnSubmit" value="Make PDF" class="btn btn-info" />
             </div>
 
         </div>
 
         <h4>View Result</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th class="text-center">Code</th>
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Result</th>
+        <div id="Grid">
+            <h4 class="hidden"> Name : <span class="StudentName"></span> </h4>
+            <h4 class="hidden">   Reg No : <span class="RegistrationNo"></span>  </h4>
+            <h4 class="hidden">   Deapartment : <span class="departmentNo"></span>  </h4>
+          
+            <table class="table table-bordered" cellpadding="5" cellspacing="0" style="border: 1px solid #ccc; font-size: 9pt;">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="background-color: #B8DBFD; border: 1px solid #ccc">Code</th>
+                        <th class="text-center" style="background-color: #B8DBFD; border: 1px solid #ccc">Name</th>
+                        <th class="text-center" style="background-color: #B8DBFD; border: 1px solid #ccc">Result</th>
 
-                </tr>
-            </thead>
-            <tbody id="Course"></tbody>
-        </table>
-    </form>
+                    </tr>
+                </thead>
+                <tbody id="Course"></tbody>
+            </table>
+        </div>
+
+
+    }
 </div>
 @section scripts
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#Grid").html());
+            });
             var studentId = 0;
             $('#StudentId').on('change', function () {
                 studentId = $('#StudentId option:selected').val();
+               var studentText = $('#StudentId option:selected').text();
+                $('.RegistrationNo').html(studentText);
                 $('#Name').val("");
                 $('#Email').val("");
                 $('#Department').val("");
@@ -102,7 +117,8 @@
                     url: '@Url.Action("SelectedStudentInfo", "Student")',
                     success: function (result) {
                         console.log(result);
-
+                        $('.StudentName').html(result.Name);
+                        $('.departmentNo').html(result.DepartmentName);
                         $('#Name').val(result.Name);
                         $('#Email').val(result.Email);
                         $('#Department').val(result.DepartmentName);
@@ -126,9 +142,9 @@
                         } else {
 
                             for (var i = 0; i < result.length; i++) {
-                                a += '<tr> <td>' + result[i].CourseCode + ' </td>' +
-                                    '<td>' + result[i].CourseName + ' </td>' +
-                                     '<td>' + result[i].Grade + ' </td>' +
+                                a += '<tr> <td style="width:120px;border: 1px solid #ccc">' + result[i].CourseCode + ' </td>' +
+                                    '<td style="width:120px;border: 1px solid #ccc">' + result[i].CourseName + ' </td>' +
+                                     '<td style="width:120px;border: 1px solid #ccc">' + result[i].Grade + ' </td>' +
                                
                                    ' </tr>';
 

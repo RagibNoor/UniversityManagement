@@ -6,103 +6,107 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/fakeLoader.css" rel="stylesheet" />
     @RenderSection("Css", required: false)
     <link href="~/Content/animate.css" rel="stylesheet" />
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("University Management System", "Index", "Home", null, new { @class = "navbar-brand text-hide" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Department
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">@Html.ActionLink("Create Department", "Save", "Department")</li>
-                            <li class="nav-item">@Html.ActionLink("View Department", "ViewAllDepartment", "Department")</li>
-                        </ul>
-                    </li>
+    <div id="fakeLoader"></div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("University Management System", "Index", "Home", null, new {@class = "navbar-brand text-hide"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Department
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">@Html.ActionLink("Create Department", "Save", "Department")</li>
+                        <li class="nav-item">@Html.ActionLink("View Department", "ViewAllDepartment", "Department")</li>
+                    </ul>
+                </li>
 
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Course
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">@Html.ActionLink("Add Course", "Save", "Course")</li>
-                            
-                            <li class="nav-item">@Html.ActionLink("Course Assign To Teacher", "AssignTeacher", "Course")</li>
-                            <li class="nav-item">@Html.ActionLink("View Course Static", "ViewCourseStatics", "Course")</li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">@Html.ActionLink("Teacher", "Index", "Teacher")</li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Student
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">@Html.ActionLink("Student Registration", "Index", "Student")</li>
-                            <li class="nav-item">@Html.ActionLink("Course Enroll", "StudentEnrollCourse", "Student")</li>
-                            <li class="nav-item">@Html.ActionLink("Assign Grade", "AssignGrade", "Student")</li>
-                            <li class="nav-item">@Html.ActionLink("View Result", "ViewResult", "Student")</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Room Allocation
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">@Html.ActionLink("Room Allocation", "Index", "ClassRoom")</li>
-                            <li class="nav-item">@Html.ActionLink("View Room Allocation", "ViewClassRoomAllocation", "ClassRoom")</li>
-                        </ul>
-                    </li>
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Course
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">@Html.ActionLink("Add Course", "Save", "Course")</li>
 
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Reset
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">@Html.ActionLink("Unallocate Classroom", "UnalocateClassroom", "Reset")</li>
-                            <li class="nav-item">@Html.ActionLink("Unassign Courses", "UnAssignCourses", "Reset")</li>
-                        </ul>
-                    </li>
+                        <li class="nav-item">@Html.ActionLink("Course Assign To Teacher", "AssignTeacher", "Course")</li>
+                        <li class="nav-item">@Html.ActionLink("View Course Static", "ViewCourseStatics", "Course")</li>
+                    </ul>
+                </li>
+                <li class="nav-item">@Html.ActionLink("Teacher", "Index", "Teacher")</li>
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Student
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">@Html.ActionLink("Student Registration", "Index", "Student")</li>
+                        <li class="nav-item">@Html.ActionLink("Course Enroll", "StudentEnrollCourse", "Student")</li>
+                        <li class="nav-item">@Html.ActionLink("Assign Grade", "AssignGrade", "Student")</li>
+                        <li class="nav-item">@Html.ActionLink("View Result", "ViewResult", "Student")</li>
+                    </ul>
+                </li>
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Room Allocation
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">@Html.ActionLink("Room Allocation", "Index", "ClassRoom")</li>
+                        <li class="nav-item">@Html.ActionLink("View Room Allocation", "ViewClassRoomAllocation", "ClassRoom")</li>
+                    </ul>
+                </li>
 
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Reset
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">@Html.ActionLink("Unallocate Classroom", "UnalocateClassroom", "Reset")</li>
+                        <li class="nav-item">@Html.ActionLink("Unassign Courses", "UnAssignCourses", "Reset")</li>
+                    </ul>
+                </li>
+
+            </ul>
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - University Managent Stystem</p>
-        </footer>
-    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - University Managent Stystem</p>
+    </footer>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-    @Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/fakeLoader.js"></script>
+@Scripts.Render("~/bundles/bootstrap")
 <script src="~/Scripts/wow.min.js"></script>
 
 <script>
     new WOW().init();
-    </script>
+    $("#fakeloader").fakeLoader();
+</script>
 
 
 

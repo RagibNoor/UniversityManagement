@@ -79,7 +79,7 @@ namespace UniversityManagement.Gateway
         {
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "select * from  ClassAllocationView where Status = 'True' And DepartmentId = '" + id + "' ";
+            string query = "select * from  ClassAllocationView where (Status  IS NULL or status = 'true') And DepartmentId = '" + id + "' ";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
             List<ClassRoomAllocationView> classRoomAllocationViews = new List<ClassRoomAllocationView>();
@@ -92,9 +92,15 @@ namespace UniversityManagement.Gateway
                 allocationView.Name = reader["Name"].ToString();
                 allocationView.RoomNo = reader["RoomNo"].ToString();
                 allocationView.StartTime = reader["StartTime"].ToString();
-                allocationView.StartTime = Get24FormatTime(allocationView.StartTime);
                 allocationView.EndTime = reader["EndTime"].ToString();
-                allocationView.EndTime = Get24FormatTime(allocationView.EndTime);
+                if (allocationView.StartTime != "")
+                {
+                    allocationView.StartTime = Get24FormatTime(allocationView.StartTime);
+                    allocationView.EndTime = Get24FormatTime(allocationView.EndTime);
+
+                    
+                }
+               
 
                 allocationView.Day = reader["Day"].ToString();
                 if (allocationView.RoomNo !="")

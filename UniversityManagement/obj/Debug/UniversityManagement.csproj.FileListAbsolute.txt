@@ -53,3 +53,6 @@ D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\Microsoft.
 D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.dll
 D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.pdb
 D:\projects\c# projects\UniversityManagement\UniversityManagement\obj\Debug\UniversityManagement.csprojResolveAssemblyReference.cache
+D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\itextsharp.dll
+D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\itextsharp.xmlworker.dll
+D:\projects\c# projects\UniversityManagement\UniversityManagement\bin\itextsharp.xml
