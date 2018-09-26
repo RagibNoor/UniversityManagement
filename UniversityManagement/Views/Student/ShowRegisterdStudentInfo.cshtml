@@ -1,0 +1,100 @@
+﻿@model UniversityManagement.Models.Student
+@{
+    ViewBag.Title = "ShowRegisterdStudentInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="headingStyle">
+    <span class="top right"></span>
+    <span class="top left"></span>
+    <h2>View Info</h2>
+    <span class="bottom right"></span>
+    <span class="bottom left"></span>
+</div>
+<div class="login-form ">
+    <table>
+        <tr>
+            <td>
+                <h5> Registration No </h5>
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                <h5>@ViewBag.student.Registration</h5>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h5> Name </h5>
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                <h5>@ViewBag.student.Name</h5>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h5> Email </h5>
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                <h5>@ViewBag.student.Email</h5>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h5> Contact Number </h5>
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                <h5>@ViewBag.student.ContactNumber</h5>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h5> Address </h5>
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                <h5>@ViewBag.student.Address</h5>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h5> Date </h5>
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                <h5>@ViewBag.student.Date</h5>
+            </td>
+        </tr>
+
+
+    </table>
+
+</div>
+
+    
+   
+   
+    
+    
+   
+
+

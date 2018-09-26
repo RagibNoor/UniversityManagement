@@ -28,6 +28,20 @@ namespace UniversityManagement.Controllers
             ViewBag.Departments = departmentBll.GetDepartments();
             return View();
         }
+        [HttpPost]
+        public ActionResult ShowRegisterdStudentInfo(Student astudent)
+        {
+            StudentGeteway astGeteway = new StudentGeteway();
+            string departmentCode = astudentBll.GetDepartmentCode(astudent.DepartmentId);
+            string year = astudent.Date.Substring(0, 4);
+            string count = astudentBll.GetNumberOFstudentInaDepartment(astudent.DepartmentId, year).ToString("000");
+
+            astudent.Registration = departmentCode + "-" + year + "-" + count;
+            ViewBag.Departments = departmentBll.GetDepartments();
+            ViewBag.student = astudent;
+            ViewBag.Message = astudentBll.Save(astudent);
+            return View();
+        }
 
 
         [HttpPost]

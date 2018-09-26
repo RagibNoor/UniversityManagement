@@ -23,7 +23,7 @@
 
 
 <div class="login-form ">
-    @using (Html.BeginForm(null, null, FormMethod.Post, new {id = "SaveStudent", @class = "wow slideInDown", data_wow_duration = "2s", data_wow_offset = "0"}))
+    @using (Html.BeginForm("ShowRegisterdStudentInfo", "Student", FormMethod.Post, new {id = "SaveStudent", @class = "wow slideInDown", data_wow_duration = "2s", data_wow_offset = "0"}))
     {
         //Name
         <div class="row form-group">

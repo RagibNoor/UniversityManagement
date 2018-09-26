@@ -279,6 +279,7 @@
     <Content Include="Views\Student\ViewResult.cshtml" />
     <Content Include="Views\Reset\UnAssignCourses.cshtml" />
     <Content Include="Views\Reset\UnalocateClassroom.cshtml" />
+    <Content Include="Views\Student\ShowRegisterdStudentInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
