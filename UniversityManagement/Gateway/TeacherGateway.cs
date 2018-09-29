@@ -61,7 +61,7 @@ namespace UniversityManagement.Gateway
         {
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "select Credit from AssignTeacher where TeacherID= '" + id + "' ";
+            string query = "select Credit from AssignTeacher where (Status  IS NULL or status = 'true') And  TeacherID= '" + id + "' ";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
             decimal remainingCredit = 0;

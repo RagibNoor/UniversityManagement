@@ -135,7 +135,7 @@ namespace UniversityManagement.Gateway
         {
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "select * from  CourseAssignToTeacher where (Status  IS NULL or status = 'true') And DepartmentId = '" + id + "' ";
+            string query = "select * from  CourseAssignToTeacher where DepartmentId = '" + id + "' ";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
             List<CourseAssignToTeacherView> courses = new List<CourseAssignToTeacherView>();
@@ -143,10 +143,17 @@ namespace UniversityManagement.Gateway
             while (reader.Read())
             {
                 CourseAssignToTeacherView course = new CourseAssignToTeacherView();
+                course.Status = reader["Status"].ToString();
+
                 course.Code = reader["CourseCode"].ToString();
                 course.Name = reader["CourseName"].ToString();
-                course.AssignTo = reader["TeacherName"].ToString();
-                if (course.AssignTo=="")
+                if (course.Status == "True")
+                {
+                    course.AssignTo = reader["TeacherName"].ToString();
+
+                    
+                }
+                if (string.IsNullOrEmpty(course.AssignTo))
                 {
                     course.AssignTo = "Not Assign Yet";
                 }

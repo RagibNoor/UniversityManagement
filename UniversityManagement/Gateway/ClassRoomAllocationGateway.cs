@@ -58,7 +58,10 @@ namespace UniversityManagement.Gateway
         {
             SqlConnection con = new SqlConnection(ConnectinString); 
             con.Open();
-            string query = "Select Count(Id) from ClassAllocation where Day ='" + classRoom.Day + "' and RoomId = '" + classRoom.RoomId + "' And Status ='True' And (('" + classRoom.StartTime + "' >= StartTime and '" + classRoom.StartTime + "' <= EndTime) or ('" + classRoom.EndTime + "' >= StartTime and '" + classRoom.EndTime + "' <= EndTime))";
+            string query = "Select Count(Id) from ClassAllocation where Day ='" + classRoom.Day + "' and RoomId = '" + classRoom.RoomId + "' And Status ='True' And (('" + classRoom.StartTime + "' >= StartTime and '" + classRoom.StartTime + "' <= EndTime) " +
+                           "or ('" + classRoom.EndTime + "' >= StartTime and '" + classRoom.EndTime + "' <= EndTime)" +
+                           " or (StartTime between '" + classRoom.StartTime + "' and '" + classRoom.EndTime + "' )  " +
+                           "or (EndTime between '" + classRoom.StartTime + "' and '" + classRoom.EndTime + "' ))";
 
             SqlCommand cmd = new SqlCommand(query, con);
             var value = cmd.ExecuteScalar();
@@ -79,7 +82,7 @@ namespace UniversityManagement.Gateway
         {
             SqlConnection con = new SqlConnection(ConnectinString);
             con.Open();
-            string query = "select * from  ClassAllocationView where (Status  IS NULL or status = 'true') And DepartmentId = '" + id + "' ";
+            string query = "select * from  ClassAllocationView where  DepartmentId = '" + id + "' ";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
             List<ClassRoomAllocationView> classRoomAllocationViews = new List<ClassRoomAllocationView>();
@@ -88,33 +91,43 @@ namespace UniversityManagement.Gateway
             {
                 int flag = 0;
                 ClassRoomAllocationView allocationView = new ClassRoomAllocationView();
+                allocationView.Status = reader["Status"].ToString();
                 allocationView.Code = reader["Code"].ToString();
                 allocationView.Name = reader["Name"].ToString();
-                allocationView.RoomNo = reader["RoomNo"].ToString();
-                allocationView.StartTime = reader["StartTime"].ToString();
-                allocationView.EndTime = reader["EndTime"].ToString();
-                if (allocationView.StartTime != "")
+                if (allocationView.Status=="True")
                 {
-                    allocationView.StartTime = Get24FormatTime(allocationView.StartTime);
-                    allocationView.EndTime = Get24FormatTime(allocationView.EndTime);
+                    allocationView.RoomNo = reader["RoomNo"].ToString();
+                    allocationView.StartTime = reader["StartTime"].ToString();
+                    allocationView.EndTime = reader["EndTime"].ToString();
+                    if (allocationView.StartTime != "")
+                    {
+                        allocationView.StartTime = Get24FormatTime(allocationView.StartTime);
+                        allocationView.EndTime = Get24FormatTime(allocationView.EndTime);
 
-                    
+
+                    }
+                    allocationView.Day = reader["Day"].ToString();
+                    if (allocationView.RoomNo != "")
+                    {
+                        allocationView.FullShedule = " R NO: " + allocationView.RoomNo + " " +
+                                                allocationView.Day.Substring(0, 3) + ":" + allocationView.StartTime + " - " +
+                                                allocationView.EndTime;
+                    }
                 }
                
+               
 
-                allocationView.Day = reader["Day"].ToString();
-                if (allocationView.RoomNo !="")
-                {
-                    allocationView.FullShedule = " R NO: " + allocationView.RoomNo + " " +
-                                            allocationView.Day.Substring(0, 3) + ":" + allocationView.StartTime + " - " +
-                                            allocationView.EndTime;
-                }
+               
 
                 foreach (var data in classRoomAllocationViews)
                 {
                     if (data.Code==allocationView.Code)
                     {
-                        data.FullShedule += "; </br>" + allocationView.FullShedule;
+                        if (data.Status != "False")
+                        {
+                            data.FullShedule += "; </br>" + allocationView.FullShedule;
+
+                        }
                         flag = 1;
                     }
                 }

@@ -204,20 +204,12 @@
                 $('#CourseName').val("");
                 $.each(courses, function(key, value) {
                     if (value.Id == courseId) {
-                        //console.log(teacherID);
-                        // console.log(value.Id);
+                        
                         $('#CourseCredit').val(value.Credit);
                         credit = value.Credit;
-                      //  console.log(credit);
+                      
                         $('#CourseName').val(value.Name);
-                       // console.log((remainingCredit != null));
-                        //console.log((creditToBeTaken - credit) < 0);
-                        //if (remainingCredit!=null) {
-                        //    if ((creditToBeTaken - credit) < 0) {
-                        //        $('#myModal').modal('show');
-                        //    }
-
-                        //}
+                      
                     }
                 });
                 var str = "field-validation-error";
@@ -228,9 +220,9 @@
                     data: { Id: courseId },
                     url: '@Url.Action("IsCourseExist", "Course")',
                     success: function (result) {
-                        teachers = result;
-                        console.log(teachers);
-                        console.log(result);
+                      //  teachers = result;
+                       // console.log(teachers);
+                       // console.log(result);
                         if (result) {
                             courseIsExist = '<span for="CourseId" class="field-validation-error">This Course is Already Assign</span>';
                            // $('#CourseId').find('.field-validation-valid').attr('class', 'field-validation-error');
@@ -258,6 +250,7 @@
                     if (value.Id == teacherID) {
                         //console.log(teacherID);
                         // console.log(value.Id);
+
                         $('#CreditToBeTaken').val(value.CreditToBeTaken);
                         creditToBeTaken = value.CreditToBeTaken;
                         $('#RemainingCredit').val(value.RemainigCredit);
